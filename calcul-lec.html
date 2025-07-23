@@ -134,94 +134,98 @@ Parution au JORF du 7 juin 2025.
             </p>
 
               <!-- Calculette LEC - Section principale -->
-              <section id="calculette-lec" class="section">
-                <div class="container">
-                  <div class="section-title" data-aos="fade-up">
-                    <h2>Calculette LEC 2025</h2>
-                    <p>Calculez le quartile d'un ménage à partir de votre territoire, de votre composition familiale et de vos ressources.</p>
-                  </div>
-              
-                  <div class="d-flex flex-wrap justify-content-between gap-4" data-aos="fade-up" data-aos-delay="100"> <!-- Encadrés à l'horizontale -->
-                    <div class="col-lg-4">
-                      <div class="service-item bg-light rounded p-4">
-                        <h4 class="fw-bold" style="color: #0ea2bd;">1 - Territoire</h4>
-                        <label for="region">Sélectionnez une région :</label>
-                        <select id="region" class="form-select mb-3"></select>
-              
-                        <label for="departement">Sélectionnez un département :</label>
-                        <select id="departement" class="form-select mb-3"></select>
-              
-                        <label for="epci">Sélectionnez un EPCI :</label>
-                        <select id="epci" class="form-select"></select>
-                      </div>
-                    </div>
-
-                    <!-- Tableau des seuils -->
-                    <div id="seuils-info" class="mt-4 p-3 bg-white border rounded d-none">
-                      <h5 class="text-primary">Montants des seuils 2025 :</h5>
-                      <table class="table table-sm table-bordered mt-2">
-                        <thead class="table-light">
-                          <tr>
-                            <th>Type de seuil</th>
-                            <th>Annuel</th>
-                            <th>Mensuel</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>Seuil de ressources <strong>Q1</strong> de l'EPCI (UC) : </td>
-                            <td id="seuilQ1Annuel">-</td>
-                            <td id="seuilQ1Mensuel">-</td>
-                          </tr>
-                          <tr>
-                            <td>Seuil de ressources <strong>Q2</strong> de l'EPCI (UC) : </td>
-                            <td id="seuilQ2Annuel">-</td>
-                            <td id="seuilQ2Mensuel">-</td>
-                          </tr>
-                          <tr>
-                            <td>Seuil de ressources <strong>Q3</strong> de l'EPCI (UC) : </td>
-                            <td id="seuilQ3Annuel">-</td>
-                            <td id="seuilQ3Mensuel">-</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                      <p class="text-danger small mt-2">
-                        Si l’EPCI recherché ne se trouve pas dans cette liste, c’est qu’il n’est pas concerné par l’obligation d’attribuer 25 % des logements hors QPV aux ménages du premier quartile en 2025.
-                      </p>
-                    </div>
-
-              
-                    <div class="col-lg-4">
-                      <div class="service-item bg-light rounded p-4">
-                        <h4 class="fw-bold" style="color: #0ea2bd;">2 - Composition du ménage + ressources déclarées</h4>
-                        <label>Titulaire de la demande : </label>
-                        <input type="number" min="0" id="titulaire" class="form-control mb-2" placeholder="Entrez obligatoirement 1">
-              
-                        <label>Co-titulaire : </label>
-                        <input type="number" min="0" id="co-titulaire" class="form-control mb-2" placeholder="Nombre de co-titulaires">
-              
-                        <label>Enfant(s) de 14 ans et/ou plus : </label>
-                        <input type="number" min="0" id="enfant14" class="form-control mb-2" placeholder="Nombre d'enfants de 14 ans et/ou plus">
-              
-                        <label>Enfant(s) de moins de 14 ans : </label>
-                        <input type="number" min="0" id="enfant13" class="form-control mb-2" placeholder="Nombre d'enfants de moins de 14 ans">
-              
-                        <label>Ressources mensuelles du foyer (en €) : </label>
-                        <input type="number" min="0" id="ressources" class="form-control" placeholder="Montant total du foyer">
-                      </div>
-                    </div>
-              
-                    <div class="col-lg-4">
-                      <div class="service-item bg-light rounded p-4 text-center">
-                        <h4 class="fw-bold" style="color: #0ea2bd;">3 - Récapitulatif</h4>
-                        <button onclick="calculerLEC()" class="btn btn-primary w-100 mb-3">Calculer</button>
-                        <button onclick="resetLEC()" class="btn btn-outline-secondary w-100 mb-3">Réinitialiser</button>
-                        <div id="resultatLEC" class="alert alert-info d-none"></div>
-                      </div>
-                    </div>
-                  </div>
+            <section id="calculette-lec" class="section">
+              <div class="container">
+                <div class="section-title" data-aos="fade-up">
+                  <h2>Calculette LEC 2025</h2>
+                  <p>Calculez le quartile d'un ménage à partir de votre territoire, de votre composition familiale et de vos ressources.</p>
                 </div>
-              </section>
+            
+                <div class="row gy-4" data-aos="fade-up" data-aos-delay="100">
+            
+                  <!-- Bloc 1 -->
+                  <div class="col-lg-4">
+                    <div class="service-item bg-light rounded p-4 h-100">
+                      <h4 class="fw-bold text-info">1 - Territoire</h4>
+                      <label for="region">Sélectionnez une région :</label>
+                      <select id="region" class="form-select mb-3"></select>
+            
+                      <label for="departement">Sélectionnez un département :</label>
+                      <select id="departement" class="form-select mb-3"></select>
+            
+                      <label for="epci">Sélectionnez un EPCI :</label>
+                      <select id="epci" class="form-select"></select>
+                    </div>
+                  </div>
+            
+                  <!-- Bloc 2 -->
+                  <div class="col-lg-4">
+                    <div class="service-item bg-light rounded p-4 h-100">
+                      <h4 class="fw-bold text-info">2 - Composition du ménage + ressources déclarées</h4>
+                      <label>Titulaire de la demande : </label>
+                      <input type="number" min="0" id="titulaire" class="form-control mb-2" placeholder="Entrez obligatoirement 1">
+            
+                      <label>Co-titulaire : </label>
+                      <input type="number" min="0" id="co-titulaire" class="form-control mb-2" placeholder="Nombre de co-titulaires">
+            
+                      <label>Enfant(s) de 14 ans et/ou plus : </label>
+                      <input type="number" min="0" id="enfant14" class="form-control mb-2" placeholder="Nombre d'enfants de 14 ans et/ou plus">
+            
+                      <label>Enfant(s) de moins de 14 ans : </label>
+                      <input type="number" min="0" id="enfant13" class="form-control mb-2" placeholder="Nombre d'enfants de moins de 14 ans">
+            
+                      <label>Ressources mensuelles du foyer (en €) : </label>
+                      <input type="number" min="0" id="ressources" class="form-control" placeholder="Montant total du foyer">
+                    </div>
+                  </div>
+            
+                  <!-- Bloc 3 -->
+                  <div class="col-lg-4">
+                    <div class="service-item bg-light rounded p-4 h-100 text-center">
+                      <h4 class="fw-bold text-info">3 - Récapitulatif</h4>
+                      <button onclick="calculerLEC()" class="btn w-100 mb-3" style="background-color:#0ea2bd; color:white">Calculer</button>
+                      <button onclick="resetLEC()" class="btn btn-outline-secondary w-100 mb-3">Réinitialiser</button>
+                      <div id="resultatLEC" class="alert alert-info d-none"></div>
+                    </div>
+                  </div>
+            
+                </div>
+            
+                <!-- Seuils -->
+                <div id="seuils-info" class="mt-4 p-3 bg-white border rounded d-none">
+                  <h5 class="text-primary">Montants des seuils 2025 :</h5>
+                  <table class="table table-sm table-bordered mt-2">
+                    <thead class="table-light">
+                      <tr>
+                        <th>Type de seuil</th>
+                        <th>Annuel</th>
+                        <th>Mensuel</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Seuil de ressources <strong>Q1</strong> de l'EPCI (UC) : </td>
+                        <td id="seuilQ1Annuel">-</td>
+                        <td id="seuilQ1Mensuel">-</td>
+                      </tr>
+                      <tr>
+                        <td>Seuil de ressources <strong>Q2</strong> de l'EPCI (UC) : </td>
+                        <td id="seuilQ2Annuel">-</td>
+                        <td id="seuilQ2Mensuel">-</td>
+                      </tr>
+                      <tr>
+                        <td>Seuil de ressources <strong>Q3</strong> de l'EPCI (UC) : </td>
+                        <td id="seuilQ3Annuel">-</td>
+                        <td id="seuilQ3Mensuel">-</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <p class="text-danger small mt-2">
+                    Si l’EPCI recherché ne se trouve pas dans cette liste, c’est qu’il n’est pas concerné par l’obligation d’attribuer 25 % des logements hors QPV aux ménages du premier quartile en 2025.
+                  </p>
+                </div>
+              </div>
+            </section>
               
             <script>
             let dataQuartiles = [];
