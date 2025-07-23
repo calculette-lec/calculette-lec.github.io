@@ -115,27 +115,234 @@
 
           <div class="col-lg-8 ps-lg-5" data-aos="fade-up" data-aos-delay="200">
             <img src="assets/img/nuage-mots-lec.png" alt="" class="img-fluid services-img">
-            <h3>Temporibus et in vero dicta aut eius lidero plastis trand lined voluptas dolorem ut voluptas</h3>
+            <h3>Calcul du quartile de ressources LEC - Périmère national - MAJ : 23 Juillet 2025</h3>
             <p>
-              Blanditiis voluptate odit ex error ea sed officiis deserunt. Cupiditate non consequatur et doloremque consequuntur. Accusantium labore reprehenderit error temporibus saepe perferendis fuga doloribus vero. Qui omnis quo sit. Dolorem architecto eum et quos deleniti officia qui.
+              Texte de référence : Arrêté du 3 juin 2025 fixant le seuil de ressources des demandeurs de logement social 
+du premier quartile de revenus mentionné à l'article L. 441-1 du code de la construction et de l'habitation.
+Parution au JORF du 7 juin 2025.
             </p>
             <ul>
-              <li><i class="bi bi-check-circle"></i> <span>Aut eum totam accusantium voluptatem.</span></li>
-              <li><i class="bi bi-check-circle"></i> <span>Assumenda et porro nisi nihil nesciunt voluptatibus.</span></li>
-              <li><i class="bi bi-check-circle"></i> <span>Ullamco laboris nisi ut aliquip ex ea</span></li>
+              <li><i class="bi bi-check-circle"></i> <span>Sélectionnez le territoire concerné : Région / Département / EPCI (dans cet ordre - liste déroulante).</span></li>
+              <li><i class="bi bi-check-circle"></i> <span>Entrez la composition du ménage (nombre de personnes selon l'âge - saisie manuelle).</span></li>
+              <li><i class="bi bi-check-circle"></i> <span>Déclarer le(s) montant(s) des ressources du méngae (saisie manuelle).</span></li>
             </ul>
             <p>
-              Est reprehenderit voluptatem necessitatibus asperiores neque sed ea illo. Deleniti quam sequi optio iste veniam repellat odit. Aut pariatur itaque nesciunt fuga.
+              ⚠️TOUTES les ressources doivent être renseignées, sous forme d'un total ou bien décomposé (les cases s'additionnent automatiquement).
             </p>
             <p>
-              Sunt rem odit accusantium omnis perspiciatis officia. Laboriosam aut consequuntur recusandae mollitia doloremque est architecto cupiditate ullam. Quia est ut occaecati fuga. Distinctio ex repellendus eveniet velit sint quia sapiente cumque. Et ipsa perferendis ut nihil. Laboriosam vel voluptates tenetur nostrum. Eaque iusto cupiditate et totam et quia dolorum in. Sunt molestiae ipsum at consequatur vero. Architecto ut pariatur autem ad non cumque nesciunt qui maxime. Sunt eum quia impedit dolore alias explicabo ea.
+              La <strong>totalité des ressources doit être saisie</strong>, c'est-à-dire celles déclarées par le ménage dans le CERFA rubrique "Ressources mensuelles du demandeur, du conjoint, du concubin ou du futur co-titulaire du bail et des personnes fiscalement à charge qui vivront dans le logement. (hors AL/APL)".
             </p>
+
+                          <!-- Calculette LEC - Section principale -->
+              <section id="calculette-lec" class="section">
+                <div class="container">
+                  <div class="section-title" data-aos="fade-up">
+                    <h2>Calculette LEC 2025</h2>
+                    <p>Calculez le quartile d'un ménage à partir de votre territoire, de votre composition familiale et de vos ressources.</p>
+                  </div>
+              
+                  <div class="row gy-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="col-lg-4">
+                      <div class="service-item bg-light rounded p-4">
+                        <h4 class="text-primary">1. Territoire</h4>
+                        <label for="region">Sélectionnez une région :</label>
+                        <select id="region" class="form-select mb-3"></select>
+              
+                        <label for="departement">Sélectionnez un département :</label>
+                        <select id="departement" class="form-select mb-3"></select>
+              
+                        <label for="epci">Sélectionnez un EPCI :</label>
+                        <select id="epci" class="form-select"></select>
+                      </div>
+                    </div>
+
+                                        <!-- Tableau des seuils -->
+                    <div id="seuils-info" class="mt-4 p-3 bg-white border rounded d-none">
+                      <h5 class="text-primary">Montants des seuils 2025 :</h5>
+                      <table class="table table-sm table-bordered mt-2">
+                        <thead class="table-light">
+                          <tr>
+                            <th>Type de seuil</th>
+                            <th>Annuel</th>
+                            <th>Mensuel</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>Seuil de ressources <strong>Q1</strong> de l'EPCI (UC)</td>
+                            <td id="seuilQ1Annuel">-</td>
+                            <td id="seuilQ1Mensuel">-</td>
+                          </tr>
+                          <tr>
+                            <td>Seuil de ressources <strong>Q2</strong> de l'EPCI (UC)</td>
+                            <td id="seuilQ2Annuel">-</td>
+                            <td id="seuilQ2Mensuel">-</td>
+                          </tr>
+                          <tr>
+                            <td>Seuil de ressources <strong>Q3</strong> de l'EPCI (UC)</td>
+                            <td id="seuilQ3Annuel">-</td>
+                            <td id="seuilQ3Mensuel">-</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <p class="text-danger small mt-2">
+                        Si l’EPCI recherché ne se trouve pas dans cette liste, c’est qu’il n’est pas concerné par l’obligation d’attribuer 25 % des logements hors QPV aux ménages du premier quartile en 2025.
+                      </p>
+                    </div>
+
+              
+                    <div class="col-lg-4">
+                      <div class="service-item bg-light rounded p-4">
+                        <h4 class="text-primary">2. Composition du ménage et ressources déclarées</h4>
+                        <label>Titulaire de la demande</label>
+                        <input type="number" min="0" id="titulaire" class="form-control mb-2" placeholder="ex: 1">
+              
+                        <label>Co-titulaire</label>
+                        <input type="number" min="0" id="co-titulaire" class="form-control mb-2" placeholder="ex: 1">
+              
+                        <label>Enfant(s) de 14 ans et/ou plus</label>
+                        <input type="number" min="0" id="enfant14" class="form-control mb-2">
+              
+                        <label>Enfant(s) de moins de 14 ans</label>
+                        <input type="number" min="0" id="enfant13" class="form-control mb-2">
+              
+                        <label>Ressources mensuelles du foyer (en €)</label>
+                        <input type="number" min="0" id="ressources" class="form-control">
+                      </div>
+                    </div>
+              
+                    <div class="col-lg-4">
+                      <div class="service-item bg-light rounded p-4 text-center">
+                        <h4 class="text-primary">3. Récapitulatif</h4>
+                        <button onclick="calculerLEC()" class="btn btn-primary w-100 mb-3">Calculer</button>
+                        <button onclick="resetLEC()" class="btn btn-outline-secondary w-100 mb-3">Réinitialiser</button>
+                        <div id="resultatLEC" class="alert alert-info d-none"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+              
+              <script>
+                let dataQuartiles = [];
+              
+                async function chargerQuartiles() {
+                  const response = await fetch("assets/data/quartiles_2025.json");
+                  dataQuartiles = await response.json();
+              
+                  const regions = [...new Set(dataQuartiles.map(e => e.Region))].sort();
+                  const selectRegion = document.getElementById("region");
+                  regions.forEach(r => {
+                    const option = document.createElement("option");
+                    option.value = r;
+                    option.textContent = r;
+                    selectRegion.appendChild(option);
+                  });
+              
+                  selectRegion.addEventListener("change", () => {
+                    const regionChoisie = selectRegion.value;
+                    const departements = [...new Set(dataQuartiles.filter(e => e.Region === regionChoisie).map(e => e.Departement))].sort();
+                    const selectDept = document.getElementById("departement");
+                    selectDept.innerHTML = '<option value="">-- Choisir un département --</option>';
+                    departements.forEach(d => {
+                      const opt = document.createElement("option");
+                      opt.value = d;
+                      opt.textContent = d;
+                      selectDept.appendChild(opt);
+                    });
+                  });
+              
+                  document.getElementById("departement").addEventListener("change", () => {
+                    const region = document.getElementById("region").value;
+                    const dept = document.getElementById("departement").value;
+                    const epcis = dataQuartiles.filter(e => e.Region === region && e.Departement === dept).map(e => e.EPCI).sort();
+                    const selectEPCI = document.getElementById("epci");
+                    selectEPCI.innerHTML = '<option value="">-- Choisir un EPCI --</option>';
+                    epcis.forEach(ep => {
+                      const opt = document.createElement("option");
+                      opt.value = ep;
+                      opt.textContent = ep;
+                      selectEPCI.appendChild(opt);
+                    });
+                  });
+                }
+              
+                function calculerLEC() {
+                  const region = document.getElementById("region").value;
+                  const dept = document.getElementById("departement").value;
+                  const epci = document.getElementById("epci").value;
+                  const titulaire = parseFloat(document.getElementById("titulaire").value) || 0;
+                  const cotitulaire = parseFloat(document.getElementById("co-titulaire").value) || 0;
+                  const enfant14 = parseFloat(document.getElementById("enfant14").value) || 0;
+                  const enfant13 = parseFloat(document.getElementById("enfant13").value) || 0;
+                  const ressources = parseFloat(document.getElementById("ressources").value) || 0;
+                
+                  const uc = (titulaire + cotitulaire) * 1 + enfant14 * 0.5 + enfant13 * 0.3;
+                  const rmuc = uc > 0 ? ressources / uc : 0;
+                
+                  const seuil = dataQuartiles.find(e => e.Region === region && e.Departement === dept && e.EPCI === epci);
+                  const seuilQ1 = seuil ? parseFloat(seuil["Seuil Q1 2025"].toString().replace(/\s/g, "")) : null;
+                
+                  // Affichage des seuils dans le tableau
+                  if (seuil) afficherSeuils(seuil);
+                
+                  const resultatBox = document.getElementById("resultatLEC");
+                  if (!seuilQ1 || uc === 0 || ressources === 0) {
+                    resultatBox.textContent = "Merci de remplir tous les champs correctement.";
+                    resultatBox.classList.remove("d-none", "alert-success", "alert-danger");
+                    resultatBox.classList.add("alert-warning");
+                    return;
+                  }
+
+                    resultatBox.textContent = `RMUC : ${Math.round(rmuc).toLocaleString()} € | Seuil Q1 : ${Math.round(seuilQ1).toLocaleString()} € → ${rmuc <= seuilQ1 ? "Éligible (Q1)" : "Hors Q1"}`;
+                    resultatBox.classList.remove("d-none", "alert-warning");
+                    resultatBox.classList.add(rmuc <= seuilQ1 ? "alert-success" : "alert-danger");
+                  }
+
+              
+                window.addEventListener("DOMContentLoaded", chargerQuartiles);
+
+                function resetLEC() {
+                    // Réinitialisation des champs
+                    document.getElementById("region").value = "";
+                    document.getElementById("departement").innerHTML = '<option value="">-- Choisir un département --</option>';
+                    document.getElementById("epci").innerHTML = '<option value="">-- Choisir un EPCI --</option>';
+                    document.getElementById("titulaire").value = "";
+                    document.getElementById("co-titulaire").value = "";
+                    document.getElementById("enfant14").value = "";
+                    document.getElementById("enfant13").value = "";
+                    document.getElementById("ressources").value = "";
+                  
+                    // Masquer résultat et seuils
+                    document.getElementById("resultatLEC").classList.add("d-none");
+                    document.getElementById("seuils-info").classList.add("d-none");
+                  }
+
+
+                function afficherSeuils(seuil) {
+                  const formatter = new Intl.NumberFormat('fr-FR', {
+                    style: 'currency',
+                    currency: 'EUR',
+                    minimumFractionDigits: 0
+                  });
+                
+                  const seuilQ1 = parseFloat(seuil["Seuil Q1 2025"].toString().replace(/\s/g, "")) || 0;
+                  const seuilQ2 = parseFloat(seuil["Seuil Q2 2025"].toString().replace(/\s/g, "")) || 0;
+                  const seuilQ3 = parseFloat(seuil["Seuil Q3 2025"].toString().replace(/\s/g, "")) || 0;
+                
+                  document.getElementById("seuilQ1Annuel").textContent = formatter.format(seuilQ1);
+                  document.getElementById("seuilQ1Mensuel").textContent = formatter.format(seuilQ1 / 12);
+                  document.getElementById("seuilQ2Annuel").textContent = formatter.format(seuilQ2);
+                  document.getElementById("seuilQ2Mensuel").textContent = formatter.format(seuilQ2 / 12);
+                  document.getElementById("seuilQ3Annuel").textContent = formatter.format(seuilQ3);
+                  document.getElementById("seuilQ3Mensuel").textContent = formatter.format(seuilQ3 / 12);
+                
+                  document.getElementById("seuils-info").classList.remove("d-none");
+                }
+  
+                </script>           
           </div>
-
-        </div>
-
       </div>
-
     </section><!-- /Service Details Section -->
 
   </main>
@@ -173,7 +380,7 @@
 
         <div class="col-lg-4 col-md-12 footer-newsletter">
           <h4>Newsletter</h4>
-          <p>Inscrivez-vous à notre newletter pour ne pas manquer nos actualités !</p>
+          <p>Inscrivez-vous à notre newsletter pour ne rien manquer de nos actualités !</p>
           <form action="forms/newsletter.php" method="post" class="php-email-form">
             <div class="newsletter-form"><input type="email" name="email"><input type="submit" value="Souscrire"></div>
             <div class="loading">Chargement en cours...</div>
