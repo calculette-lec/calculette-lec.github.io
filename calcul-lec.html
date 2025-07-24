@@ -5,26 +5,39 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <title>Calculette LEC 2025</title>
-  <meta name="description" content="">
-  <meta name="keywords" content="">
-
-  <!-- Favicons -->
   <link href="assets/img/calcul-icon.png" rel="icon">
-
-  <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-
-  <!-- Vendor CSS Files -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
   <link href="assets/vendor/aos/aos.css" rel="stylesheet">
   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-
-  <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
+  <style>
+    label {
+      font-weight: bold;
+    }
+    #seuils-info th, #seuils-info td {
+      text-align: center;
+      vertical-align: middle;
+    }
+    #seuils-info h5 {
+      font-weight: bold;
+    }
+    #seuils-info .text-danger {
+      text-align: center;
+      font-style: italic;
+    }
+    #compositionMénage, #rmucMensuel, #rmucAnnuel, #resultatLEC {
+      text-align: center;
+    }
+    #quartileBox {
+      text-align: center;
+    }
+  </style>
+</head>
 
   <!-- =======================================================
   * Template Name: QuickStart
@@ -234,168 +247,79 @@ Parution au JORF du 7 juin 2025.
             <!-- Fichier contenant les données annuelles Q1, Q2, Q3 -->
             <script src="assets/data/dataQuartiles_script.js"></script>
             
-<script>
-  function chargerQuartiles() {
-    const selectRegion = document.getElementById("region");
-    const regions = [...new Set(dataQuartiles.map(e => e.Region))].sort();
-    selectRegion.innerHTML = '<option value="">-- Choisir une région --</option>';
-    regions.forEach(r => {
-      const option = document.createElement("option");
-      option.value = r;
-      option.textContent = r;
-      selectRegion.appendChild(option);
-    });
+  <script src="assets/data/dataQuartiles_script.js"></script>
+  <script>
+    function afficherCompositionMénage(titulaire, cotitulaire, enfant14, enfant13) {
+      const details = [];
+      if (titulaire > 0) details.push(`${titulaire} titulaire${titulaire > 1 ? 's' : ''}`);
+      if (cotitulaire > 0) details.push(`${cotitulaire} co-titulaire${cotitulaire > 1 ? 's' : ''}`);
+      if (enfant14 > 0) details.push(`${enfant14} enfant${enfant14 > 1 ? 's' : ''} de 14 ans ou plus`);
+      if (enfant13 > 0) details.push(`${enfant13} enfant${enfant13 > 1 ? 's' : ''} de moins de 14 ans`);
+      return `Ménage composé de ${details.join(', ')}.`;
+    }
 
-    selectRegion.addEventListener("change", () => {
-      const region = selectRegion.value;
-      const departements = [...new Set(dataQuartiles
-        .filter(e => e.Region === region)
-        .map(e => e.Departement))].sort();
-
-      const selectDept = document.getElementById("departement");
-      selectDept.innerHTML = '<option value="">-- Choisir un département --</option>';
-      departements.forEach(d => {
-        const opt = document.createElement("option");
-        opt.value = d;
-        opt.textContent = d;
-        selectDept.appendChild(opt);
-      });
-    });
-
-    document.getElementById("departement").addEventListener("change", () => {
+    function calculerLEC() {
       const region = document.getElementById("region").value;
       const dept = document.getElementById("departement").value;
-      const epcis = dataQuartiles
-        .filter(e => e.Region === region && e.Departement === dept)
-        .map(e => e.EPCI)
-        .sort();
+      const epci = document.getElementById("epci").value;
+      const titulaire = parseFloat(document.getElementById("titulaire").value) || 0;
+      const cotitulaire = parseFloat(document.getElementById("co-titulaire").value) || 0;
+      const enfant14 = parseFloat(document.getElementById("enfant14").value) || 0;
+      const enfant13 = parseFloat(document.getElementById("enfant13").value) || 0;
+      const ressources = parseFloat(document.getElementById("ressources").value) || 0;
 
-      const selectEPCI = document.getElementById("epci");
-      selectEPCI.innerHTML = '<option value="">-- Choisir un EPCI --</option>';
-      epcis.forEach(ep => {
-        const opt = document.createElement("option");
-        opt.value = ep;
-        opt.textContent = ep;
-        selectEPCI.appendChild(opt);
-      });
-    });
-  }
+      const uc = (titulaire + cotitulaire) + enfant14 * 0.5 + enfant13 * 0.3;
+      const rmuc = uc > 0 ? ressources / uc : 0;
+      const revenuAnnuel = rmuc * 12;
 
-function calculerLEC() {
-    const region = document.getElementById("region").value;
-    const dept = document.getElementById("departement").value;
-    const epci = document.getElementById("epci").value;
-    const titulaire = parseFloat(document.getElementById("titulaire").value) || 0;
-    const cotitulaire = parseFloat(document.getElementById("co-titulaire").value) || 0;
-    const enfant14 = parseFloat(document.getElementById("enfant14").value) || 0;
-    const enfant13 = parseFloat(document.getElementById("enfant13").value) || 0;
-    const ressources = parseFloat(document.getElementById("ressources").value) || 0;
+      document.getElementById("rmucMensuel").textContent = `Soit ressources mensuelles par UC : ${rmuc.toFixed(2).toLocaleString("fr-FR")} €`;
+      document.getElementById("rmucAnnuel").textContent = `Soit ressources annuelles par UC : ${revenuAnnuel.toFixed(2).toLocaleString("fr-FR")} €`;
 
-    const uc = (titulaire + cotitulaire) + enfant14 * 0.5 + enfant13 * 0.3;
-    const rmuc = uc > 0 ? ressources / uc : 0;
-    const revenuAnnuel = rmuc * 12;
+      const seuil = dataQuartiles.find(e => e.Region === region && e.Departement === dept && e.EPCI === epci);
+      const resultatBox = document.getElementById("resultatLEC");
+      const compositionText = afficherCompositionMénage(titulaire, cotitulaire, enfant14, enfant13);
+      document.getElementById("compositionMénage").textContent = compositionText;
 
-    document.getElementById("rmucMensuel").textContent = `Soit ressources mensuelles par UC : ${rmuc.toFixed(2).toLocaleString("fr-FR")} €`;
-    document.getElementById("rmucAnnuel").textContent = `Soit ressources annuelles par UC : ${revenuAnnuel.toFixed(2).toLocaleString("fr-FR")} €`;
+      if (!seuil || uc === 0 || ressources === 0) {
+        resultatBox.textContent = "Merci de remplir tous les champs correctement.";
+        resultatBox.classList.remove("d-none", "alert-success", "alert-danger");
+        resultatBox.classList.add("alert-warning");
+        return;
+      }
 
-    const seuil = dataQuartiles.find(e =>
-      e.Region === region &&
-      e.Departement === dept &&
-      e.EPCI === epci
-    );
+      const seuilQ1 = parseFloat(seuil["Seuil Q1 2025"]);
+      const seuilQ2 = parseFloat(seuil["Seuil Q2 2025"]);
+      const seuilQ3 = parseFloat(seuil["Seuil Q3 2025"]);
 
-    const resultatBox = document.getElementById("resultatLEC");
-    const totalPersonnes = titulaire + cotitulaire + enfant14 + enfant13;
-    document.getElementById("compositionMénage").textContent = `Ménage composé de ${totalPersonnes} personne(s) au total.`;
+      afficherSeuils(seuil);
 
-    if (!seuil || uc === 0 || ressources === 0) {
-      resultatBox.textContent = "Merci de remplir tous les champs correctement.";
-      resultatBox.classList.remove("d-none", "alert-success", "alert-danger");
-      resultatBox.classList.add("alert-warning");
-      return;
+      let quartileText = "";
+      let boxClass = "";
+
+      if (revenuAnnuel <= seuilQ1) {
+        quartileText = "Ménage appartenant au 1er quartile";
+        boxClass = "alert-success";
+      } else if (revenuAnnuel <= seuilQ2) {
+        quartileText = "Ménage appartenant au 2ᵉ quartile";
+        boxClass = "alert-info";
+      } else if (revenuAnnuel <= seuilQ3) {
+        quartileText = "Ménage appartenant au 3ᵉ quartile";
+        boxClass = "alert-info";
+      } else {
+        quartileText = "Ménage appartenant au 4ᵉ quartile";
+        boxClass = "alert-info";
+      }
+
+      const quartileBox = document.getElementById("quartileBox");
+      quartileBox.textContent = quartileText;
+      quartileBox.className = `alert ${boxClass} text-center fw-bold fs-5`;
+      quartileBox.classList.remove("d-none");
+
+      resultatBox.textContent = `RMUC annuel : ${Math.round(revenuAnnuel).toLocaleString()} € | Seuil Q1 : ${Math.round(seuilQ1).toLocaleString()} € → ${revenuAnnuel <= seuilQ1 ? "Éligible (Q1)" : "Hors Q1"}`;
+      resultatBox.classList.remove("d-none", "alert-warning");
+      resultatBox.classList.add(revenuAnnuel <= seuilQ1 ? "alert-success" : "alert-danger");
     }
-
-    const seuilQ1 = parseFloat(seuil["Seuil Q1 2025"]);
-    const seuilQ2 = parseFloat(seuil["Seuil Q2 2025"]);
-    const seuilQ3 = parseFloat(seuil["Seuil Q3 2025"]);
-
-    afficherSeuils(seuil);
-
-    let quartileText = "";
-    let boxClass = "";
-
-    if (revenuAnnuel <= seuilQ1) {
-      quartileText = "Ménage appartenant au 1er quartile";
-      boxClass = "alert-success";
-    } else if (revenuAnnuel <= seuilQ2) {
-      quartileText = "Ménage appartenant au 2ᵉ quartile";
-      boxClass = "alert-warning";
-    } else if (revenuAnnuel <= seuilQ3) {
-      quartileText = "Ménage appartenant au 3ᵉ quartile";
-      boxClass = "alert-info";
-    } else {
-      quartileText = "Ménage appartenant au 4ᵉ quartile";
-      boxClass = "alert-secondary";
-    }
-
-    // Résumé + affichages
-    const quartileBox = document.getElementById("quartileBox");
-    quartileBox.textContent = quartileText;
-    quartileBox.className = `alert ${boxClass} text-center fw-bold fs-5`;
-    quartileBox.classList.remove("d-none");
-
-    resultatBox.textContent = `RMUC annuel : ${Math.round(revenuAnnuel).toLocaleString()} € | Seuil Q1 : ${Math.round(seuilQ1).toLocaleString()} € → ${revenuAnnuel <= seuilQ1 ? "Éligible (Q1)" : "Hors Q1"}`;
-    resultatBox.classList.remove("d-none", "alert-warning");
-    resultatBox.classList.add(revenuAnnuel <= seuilQ1 ? "alert-success" : "alert-danger");
-  }
-
-  function afficherSeuils(seuil) {
-    const formatter = new Intl.NumberFormat('fr-FR', {
-      style: 'currency',
-      currency: 'EUR',
-      minimumFractionDigits: 0
-    });
-
-    const seuilQ1 = parseFloat(seuil["Seuil Q1 2025"]) || 0;
-    const seuilQ2 = parseFloat(seuil["Seuil Q2 2025"]) || 0;
-    const seuilQ3 = parseFloat(seuil["Seuil Q3 2025"]) || 0;
-
-    document.getElementById("seuilQ1Annuel").textContent = formatter.format(seuilQ1);
-    document.getElementById("seuilQ1Mensuel").textContent = formatter.format(parseFloat((seuilQ1 / 12).toFixed(2)));
-
-    document.getElementById("seuilQ2Annuel").textContent = formatter.format(seuilQ2);
-    document.getElementById("seuilQ2Mensuel").textContent = formatter.format(parseFloat((seuilQ2 / 12).toFixed(2)));
-
-    document.getElementById("seuilQ3Annuel").textContent = formatter.format(seuilQ3);
-    document.getElementById("seuilQ3Mensuel").textContent = formatter.format(parseFloat((seuilQ3 / 12).toFixed(2)));
-
-    document.getElementById("seuils-info").classList.remove("d-none");
-  }
-
-  function resetLEC() {
-    document.getElementById("region").value = "";
-    document.getElementById("departement").innerHTML = "";
-    document.getElementById("epci").innerHTML = "";
-    document.getElementById("titulaire").value = "";
-    document.getElementById("co-titulaire").value = "";
-    document.getElementById("enfant14").value = "";
-    document.getElementById("enfant13").value = "";
-    document.getElementById("ressources").value = "";
-    document.getElementById("resultatLEC").classList.add("d-none");
-    document.getElementById("seuils-info").classList.add("d-none");
-    document.getElementById("rmucMensuel").textContent = "";
-    document.getElementById("rmucAnnuel").textContent = "";
-    document.getElementById("compositionMénage").textContent = "";
-    document.getElementById("quartileBox").classList.add("d-none");
-
-
-  }
-
-  document.addEventListener("DOMContentLoaded", function () {
-    chargerQuartiles();
-  });
-</script>
-
+  </script>
           </div>
       </div>
     </section><!-- /Calculette Section -->
