@@ -281,7 +281,7 @@ Parution au JORF du 7 juin 2025.
     });
   }
 
-  function calculerLEC() {
+function calculerLEC() {
     const region = document.getElementById("region").value;
     const dept = document.getElementById("departement").value;
     const epci = document.getElementById("epci").value;
@@ -293,8 +293,10 @@ Parution au JORF du 7 juin 2025.
 
     const uc = (titulaire + cotitulaire) + enfant14 * 0.5 + enfant13 * 0.3;
     const rmuc = uc > 0 ? ressources / uc : 0;
+    const revenuAnnuel = rmuc * 12;
+
     document.getElementById("rmucMensuel").textContent = `Soit ressources mensuelles par UC : ${rmuc.toFixed(2).toLocaleString("fr-FR")} €`;
-    document.getElementById("rmucAnnuel").textContent = `Soit ressources annuelles par UC : ${(rmuc * 12).toFixed(2).toLocaleString("fr-FR")} €`;
+    document.getElementById("rmucAnnuel").textContent = `Soit ressources annuelles par UC : ${revenuAnnuel.toFixed(2).toLocaleString("fr-FR")} €`;
 
     const seuil = dataQuartiles.find(e =>
       e.Region === region &&
@@ -302,54 +304,49 @@ Parution au JORF du 7 juin 2025.
       e.EPCI === epci
     );
 
-    const seuilQ1 = seuil ? parseFloat(seuil["Seuil Q1 2025"]) : null;
-
-    if (seuil) afficherSeuils(seuil);
-
-    if (!seuil) {
-      resultatBox.textContent = "Merci de remplir tous les champs correctement.";
-      resultatBox.classList.remove("d-none", "alert-success", "alert-danger");
-      resultatBox.classList.add("alert-warning");
-      return;
-    }
-
-
     const resultatBox = document.getElementById("resultatLEC");
     const totalPersonnes = titulaire + cotitulaire + enfant14 + enfant13;
     document.getElementById("compositionMénage").textContent = `Ménage composé de ${totalPersonnes} personne(s) au total.`;
 
-    if (!seuilQ1 || uc === 0 || ressources === 0) {
+    if (!seuil || uc === 0 || ressources === 0) {
       resultatBox.textContent = "Merci de remplir tous les champs correctement.";
       resultatBox.classList.remove("d-none", "alert-success", "alert-danger");
       resultatBox.classList.add("alert-warning");
       return;
     }
-    
-    const revenuAnnuel = rmuc * 12;
-    resultatBox.textContent = `RMUC annuel : ${Math.round(revenuAnnuel).toLocaleString()} € | Seuil Q1 : ${Math.round(seuilQ1).toLocaleString()} € → ${revenuAnnuel <= seuilQ1 ? "Éligible (Q1)" : "Hors Q1"}`;
+
+    const seuilQ1 = parseFloat(seuil["Seuil Q1 2025"]);
+    const seuilQ2 = parseFloat(seuil["Seuil Q2 2025"]);
+    const seuilQ3 = parseFloat(seuil["Seuil Q3 2025"]);
+
+    afficherSeuils(seuil);
+
     let quartileText = "";
-    let boxClass = "alert-danger";
-    
-    if (rmuc <= seuilQ1) {
+    let boxClass = "";
+
+    if (revenuAnnuel <= seuilQ1) {
       quartileText = "Ménage appartenant au 1er quartile";
       boxClass = "alert-success";
-    } else if (rmuc <= seuil["Seuil Q2 2025"]) {
+    } else if (revenuAnnuel <= seuilQ2) {
       quartileText = "Ménage appartenant au 2ᵉ quartile";
       boxClass = "alert-warning";
-    } else if (rmuc <= seuil["Seuil Q3 2025"]) {
+    } else if (revenuAnnuel <= seuilQ3) {
       quartileText = "Ménage appartenant au 3ᵉ quartile";
       boxClass = "alert-info";
     } else {
       quartileText = "Ménage appartenant au 4ᵉ quartile";
       boxClass = "alert-secondary";
     }
-    
+
+    // Résumé + affichages
     const quartileBox = document.getElementById("quartileBox");
     quartileBox.textContent = quartileText;
     quartileBox.className = `alert ${boxClass} text-center fw-bold fs-5`;
     quartileBox.classList.remove("d-none");
+
+    resultatBox.textContent = `RMUC annuel : ${Math.round(revenuAnnuel).toLocaleString()} € | Seuil Q1 : ${Math.round(seuilQ1).toLocaleString()} € → ${revenuAnnuel <= seuilQ1 ? "Éligible (Q1)" : "Hors Q1"}`;
     resultatBox.classList.remove("d-none", "alert-warning");
-    resultatBox.classList.add(rmuc <= seuilQ1 ? "alert-success" : "alert-danger");
+    resultatBox.classList.add(revenuAnnuel <= seuilQ1 ? "alert-success" : "alert-danger");
   }
 
   function afficherSeuils(seuil) {
