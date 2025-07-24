@@ -155,6 +155,40 @@ Parution au JORF du 7 juin 2025.
             
                       <label for="epci">Sélectionnez un EPCI :</label>
                       <select id="epci" class="form-select"></select>
+
+                      <!-- Seuils -->
+                      <div id="seuils-info" class="mt-4 p-3 bg-white border rounded d-none">
+                        <h5 style="color: #0ea2bd;">Montants des seuils 2025 :</h5>
+                        <table class="table table-sm table-bordered mt-2">
+                          <thead class="table-light">
+                            <tr>
+                              <th>Type de seuil</th>
+                              <th>Annuel</th>
+                              <th>Mensuel</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>Seuil de ressources <strong>Q1</strong> de l'EPCI (UC) :</td>
+                              <td id="seuilQ1Annuel">-</td>
+                              <td id="seuilQ1Mensuel">-</td>
+                            </tr>
+                            <tr>
+                              <td>Seuil de ressources <strong>Q2</strong> de l'EPCI (UC) :</td>
+                              <td id="seuilQ2Annuel">-</td>
+                              <td id="seuilQ2Mensuel">-</td>
+                            </tr>
+                            <tr>
+                              <td>Seuil de ressources <strong>Q3</strong> de l'EPCI (UC) :</td>
+                              <td id="seuilQ3Annuel">-</td>
+                              <td id="seuilQ3Mensuel">-</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <p class="text-danger small mt-2">
+                          Si l’EPCI recherché ne se trouve pas dans cette liste, c’est qu’il n’est pas concerné par l’obligation d’attribuer 25 % des logements hors QPV aux ménages du premier quartile en 2025.
+                        </p>
+                      </div>
                     </div>
                   </div>
             
@@ -183,48 +217,18 @@ Parution au JORF du 7 juin 2025.
                   <div class="col-lg-10">
                     <div class="row justify-content-center mb-4" data-aos="fade-up" data-aos-delay="100">
                       <h4 class="fw-bold" style="color: #0ea2bd;">3 - Récapitulatif</h4>
+                      <p id="compositionMénage" class="mb-2 fw-semibold"></p>
+                      <div id="quartileBox" class="alert d-none text-center fw-bold fs-5" style="padding: 15px; border: 2px solid #ccc; border-radius: 6px;"></div>
                       <button onclick="calculerLEC()" class="btn w-100 mb-3" style="background-color:#0ea2bd; color:white">Calculer</button>
                       <button onclick="resetLEC()" class="btn btn-outline-secondary w-100 mb-3">Réinitialiser</button>
                       <div id="resultatLEC" class="alert alert-info d-none"></div>
+                      <p id="rmucMensuel" class="mt-3 mb-1"></p>
+                      <p id="rmucAnnuel" class="mb-3"></p>
+
                     </div>
                   </div>
             
                 </div>
-            
-                <!-- Seuils -->
-                <div id="seuils-info" class="mt-4 p-3 bg-white border rounded d-none">
-                  <h5 class="text-primary">Montants des seuils 2025 :</h5>
-                  <table class="table table-sm table-bordered mt-2">
-                    <thead class="table-light">
-                      <tr>
-                        <th>Type de seuil</th>
-                        <th>Annuel</th>
-                        <th>Mensuel</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>Seuil de ressources <strong>Q1</strong> de l'EPCI (UC) : </td>
-                        <td id="seuilQ1Annuel">-</td>
-                        <td id="seuilQ1Mensuel">-</td>
-                      </tr>
-                      <tr>
-                        <td>Seuil de ressources <strong>Q2</strong> de l'EPCI (UC) : </td>
-                        <td id="seuilQ2Annuel">-</td>
-                        <td id="seuilQ2Mensuel">-</td>
-                      </tr>
-                      <tr>
-                        <td>Seuil de ressources <strong>Q3</strong> de l'EPCI (UC) : </td>
-                        <td id="seuilQ3Annuel">-</td>
-                        <td id="seuilQ3Mensuel">-</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  <p class="text-danger small mt-2">
-                    Si l’EPCI recherché ne se trouve pas dans cette liste, c’est qu’il n’est pas concerné par l’obligation d’attribuer 25 % des logements hors QPV aux ménages du premier quartile en 2025.
-                  </p>
-                </div>
-              </div>
             </section>
               
             <!-- Fichier contenant les données annuelles Q1, Q2, Q3 -->
@@ -289,6 +293,8 @@ Parution au JORF du 7 juin 2025.
 
     const uc = (titulaire + cotitulaire) + enfant14 * 0.5 + enfant13 * 0.3;
     const rmuc = uc > 0 ? ressources / uc : 0;
+    document.getElementById("rmucMensuel").textContent = `Soit ressources mensuelles par UC : ${rmuc.toFixed(2).toLocaleString("fr-FR")} €`;
+    document.getElementById("rmucAnnuel").textContent = `Soit ressources annuelles par UC : ${(rmuc * 12).toFixed(2).toLocaleString("fr-FR")} €`;
 
     const seuil = dataQuartiles.find(e =>
       e.Region === region &&
@@ -300,15 +306,48 @@ Parution au JORF du 7 juin 2025.
 
     if (seuil) afficherSeuils(seuil);
 
-    const resultatBox = document.getElementById("resultatLEC");
-    if (!seuilQ1 || uc === 0 || ressources === 0) {
+    if (!seuil) {
       resultatBox.textContent = "Merci de remplir tous les champs correctement.";
       resultatBox.classList.remove("d-none", "alert-success", "alert-danger");
       resultatBox.classList.add("alert-warning");
       return;
     }
 
-    resultatBox.textContent = `RMUC : ${Math.round(rmuc).toLocaleString()} € | Seuil Q1 : ${Math.round(seuilQ1).toLocaleString()} € → ${rmuc <= seuilQ1 ? "Éligible (Q1)" : "Hors Q1"}`;
+
+    const resultatBox = document.getElementById("resultatLEC");
+    const totalPersonnes = titulaire + cotitulaire + enfant14 + enfant13;
+    document.getElementById("compositionMénage").textContent = `Ménage composé de ${totalPersonnes} personne(s) au total.`;
+
+    if (!seuilQ1 || uc === 0 || ressources === 0) {
+      resultatBox.textContent = "Merci de remplir tous les champs correctement.";
+      resultatBox.classList.remove("d-none", "alert-success", "alert-danger");
+      resultatBox.classList.add("alert-warning");
+      return;
+    }
+    
+    const revenuAnnuel = rmuc * 12;
+    resultatBox.textContent = `RMUC annuel : ${Math.round(revenuAnnuel).toLocaleString()} € | Seuil Q1 : ${Math.round(seuilQ1).toLocaleString()} € → ${revenuAnnuel <= seuilQ1 ? "Éligible (Q1)" : "Hors Q1"}`;
+    let quartileText = "";
+    let boxClass = "alert-danger";
+    
+    if (rmuc <= seuilQ1) {
+      quartileText = "Ménage appartenant au 1er quartile";
+      boxClass = "alert-success";
+    } else if (rmuc <= seuil["Seuil Q2 2025"]) {
+      quartileText = "Ménage appartenant au 2ᵉ quartile";
+      boxClass = "alert-warning";
+    } else if (rmuc <= seuil["Seuil Q3 2025"]) {
+      quartileText = "Ménage appartenant au 3ᵉ quartile";
+      boxClass = "alert-info";
+    } else {
+      quartileText = "Ménage appartenant au 4ᵉ quartile";
+      boxClass = "alert-secondary";
+    }
+    
+    const quartileBox = document.getElementById("quartileBox");
+    quartileBox.textContent = quartileText;
+    quartileBox.className = `alert ${boxClass} text-center fw-bold fs-5`;
+    quartileBox.classList.remove("d-none");
     resultatBox.classList.remove("d-none", "alert-warning");
     resultatBox.classList.add(rmuc <= seuilQ1 ? "alert-success" : "alert-danger");
   }
@@ -347,6 +386,12 @@ Parution au JORF du 7 juin 2025.
     document.getElementById("ressources").value = "";
     document.getElementById("resultatLEC").classList.add("d-none");
     document.getElementById("seuils-info").classList.add("d-none");
+    document.getElementById("rmucMensuel").textContent = "";
+    document.getElementById("rmucAnnuel").textContent = "";
+    document.getElementById("compositionMénage").textContent = "";
+    document.getElementById("quartileBox").classList.add("d-none");
+
+
   }
 
   document.addEventListener("DOMContentLoaded", function () {
