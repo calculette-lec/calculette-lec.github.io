@@ -278,35 +278,41 @@ Parution au JORF du 7 juin 2025.
   }
 
   function calculerLEC() {
-    const region = document.getElementById("region").value;
-    const dept = document.getElementById("departement").value;
-    const epci = document.getElementById("epci").value;
-    const titulaire = parseFloat(document.getElementById("titulaire").value) || 0;
-    const cotitulaire = parseFloat(document.getElementById("co-titulaire").value) || 0;
-    const enfant14 = parseFloat(document.getElementById("enfant14").value) || 0;
-    const enfant13 = parseFloat(document.getElementById("enfant13").value) || 0;
-    const ressources = parseFloat(document.getElementById("ressources").value) || 0;
+  const region = document.getElementById("region").value;
+  const dept = document.getElementById("departement").value;
+  const epci = document.getElementById("epci").value;
+  const titulaire = parseFloat(document.getElementById("titulaire").value) || 0;
+  const cotitulaire = parseFloat(document.getElementById("co-titulaire").value) || 0;
+  const enfant14 = parseFloat(document.getElementById("enfant14").value) || 0;
+  const enfant13 = parseFloat(document.getElementById("enfant13").value) || 0;
+  const ressources = parseFloat(document.getElementById("ressources").value) || 0;
 
-    const uc = (titulaire + cotitulaire) + enfant14 * 0.5 + enfant13 * 0.3;
-    const rmuc = uc > 0 ? ressources / uc : 0;
+  const uc = (titulaire + cotitulaire) + enfant14 * 0.5 + enfant13 * 0.3;
+  const rmuc = uc > 0 ? ressources / uc : 0;
+  const revenuAnnuel = rmuc * 12;
 
-    const seuil = dataQuartiles.find(e =>
-      e.Region === region &&
-      e.Departement === dept &&
-      e.EPCI === epci
-    );
+  const seuil = dataQuartiles.find(e =>
+    e.Region === region &&
+    e.Departement === dept &&
+    e.EPCI === epci
+  );
 
-    const seuilQ1 = seuil ? parseFloat(seuil["Seuil Q1 2025"]) : null;
+  const seuilQ1 = seuil ? parseFloat(seuil["Seuil Q1 2025"]) : null;
 
-    if (seuil) afficherSeuils(seuil);
+  if (seuil) afficherSeuils(seuil);
 
-    const resultatBox = document.getElementById("resultatLEC");
-    if (!seuilQ1 || uc === 0 || ressources === 0) {
-      resultatBox.textContent = "Merci de remplir tous les champs correctement.";
-      resultatBox.classList.remove("d-none", "alert-success", "alert-danger");
-      resultatBox.classList.add("alert-warning");
-      return;
-    }
+  const resultatBox = document.getElementById("resultatLEC");
+  if (!seuilQ1 || uc === 0 || ressources === 0) {
+    resultatBox.textContent = "Merci de remplir tous les champs correctement.";
+    resultatBox.classList.remove("d-none", "alert-success", "alert-danger");
+    resultatBox.classList.add("alert-warning");
+    return;
+  }
+
+  resultatBox.textContent = `RMUC annuel : ${Math.round(revenuAnnuel).toLocaleString()} € | Seuil Q1 : ${Math.round(seuilQ1).toLocaleString()} € → ${revenuAnnuel <= seuilQ1 ? "Éligible (Q1)" : "Hors Q1"}`;
+  resultatBox.classList.remove("d-none", "alert-warning");
+  resultatBox.classList.add(revenuAnnuel <= seuilQ1 ? "alert-success" : "alert-danger");
+}
 
     resultatBox.textContent = `RMUC : ${Math.round(rmuc).toLocaleString()} € | Seuil Q1 : ${Math.round(seuilQ1).toLocaleString()} € → ${rmuc <= seuilQ1 ? "Éligible (Q1)" : "Hors Q1"}`;
     resultatBox.classList.remove("d-none", "alert-warning");
