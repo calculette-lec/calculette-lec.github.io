@@ -1,4 +1,4 @@
-const dataQuartiles = [
+window.dataQuartiles = [
   {
     "Region": "Auvergne-Rhône-Alpes",
     "Departement": "01 - Ain",
