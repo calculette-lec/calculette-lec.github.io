@@ -234,7 +234,7 @@ Parution au JORF du 7 juin 2025.
               function chargerQuartiles() {
                 const selectRegion = document.getElementById("region");
                 const regions = [...new Set(dataQuartiles.map(e => e.Region))].sort();
-								  selectRegion.innerHTML = '<option value="">-- Choisir une région --</option>';
+		selectRegion.innerHTML = '<option value="">-- Choisir une région --</option>';
                 regions.forEach(r => {
                   const option = document.createElement("option");
                   option.value = r;
@@ -336,8 +336,7 @@ Parution au JORF du 7 juin 2025.
                 document.getElementById("resultatLEC").classList.add("d-none");
                 document.getElementById("seuils-info").classList.add("d-none");
               }
-            
-              window.addEventListener("DOMContentLoaded", chargerQuartiles);
+
             </script>
 
           </div>
