@@ -115,16 +115,20 @@
 
           <div class="col-lg-8 ps-lg-5" data-aos="fade-up" data-aos-delay="200">
             <img src="assets/img/nuage-mots-lec.png" alt="" class="img-fluid services-img">
-            <h3>Calcul du quartile de ressources LEC - Périmère national - MAJ : 23 Juillet 2025</h3>
-            <p>
-              Texte de référence : Arrêté du 3 juin 2025 fixant le seuil de ressources des demandeurs de logement social 
-du premier quartile de revenus mentionné à l'article L. 441-1 du code de la construction et de l'habitation.
-Parution au JORF du 7 juin 2025.
-            </p>
+            <h3 class="text-center">Calcul du quartile de ressources LEC - Périmère national - MAJ : 24 Juillet 2025</h3>
+              <p class="text-center">
+                Texte de référence :
+                <a href="https://www.legifrance.gouv.fr/loda/id/JORFTEXT000051698932/" target="_blank" rel="noopener noreferrer">
+                  Arrêté du 3 juin 2025
+                </a>
+                fixant le seuil de ressources des demandeurs de logement social du premier quartile de revenus mentionné à l'article L. 441-1 du code de la construction et de l'habitation.
+                <br>Parution au JORF du 7 juin 2025.
+              </p>
             <ul>
               <li><i class="bi bi-check-circle"></i> <span>Sélectionnez le territoire concerné : Région / Département / EPCI (dans cet ordre - liste déroulante).</span></li>
               <li><i class="bi bi-check-circle"></i> <span>Entrez la composition du ménage (nombre de personnes selon l'âge - saisie manuelle).</span></li>
-              <li><i class="bi bi-check-circle"></i> <span>Déclarer le(s) montant(s) des ressources du méngae (saisie manuelle).</span></li>
+              <li><i class="bi bi-check-circle"></i> <span>Déclarez le(s) montant(s) des ressources du ménage (saisie manuelle).</span></li>
+              <li><i class="bi bi-check-circle"></i> <span>Cliquez sur le bouton "Calculer" pour valider la situation.</span></li>
             </ul>
             <p>
               ⚠️TOUTES les ressources doivent être renseignées, sous forme d'un total ou bien décomposé (les cases s'additionnent automatiquement).
@@ -147,45 +151,45 @@ Parution au JORF du 7 juin 2025.
                   <div class="col-lg-10">
                     <div class="row justify-content-center mb-4" data-aos="fade-up" data-aos-delay="100">
                       <h4 class="fw-bold" style="color: #0ea2bd;">1 - Territoire</h4>
-                      <label for="region">Sélectionnez une région :</label>
+                      <label for="region"><strong>Sélectionnez une région :</strong></label>
                       <select id="region" class="form-select mb-3"></select>
             
-                      <label for="departement">Sélectionnez un département :</label>
+                      <label for="departement"><strong>Sélectionnez un département :</strong></label>
                       <select id="departement" class="form-select mb-3"></select>
             
-                      <label for="epci">Sélectionnez un EPCI :</label>
+                      <label for="epci"><strong>Sélectionnez un EPCI :</label>
                       <select id="epci" class="form-select"></select>
 
                       <!-- Seuils -->
                       <div id="seuils-info" class="mt-4 p-3 bg-white border rounded d-none">
-                        <h5 style="color: #0ea2bd;">Montants des seuils 2025 :</h5>
+                        <h5 style="color: #0ea2bd;"><strong>Montants des seuils 2025 :</strong></h5>
                         <table class="table table-sm table-bordered mt-2">
                           <thead class="table-light">
                             <tr>
                               <th>Type de seuil</th>
-                              <th>Annuel</th>
-                              <th>Mensuel</th>
+                              <th class="text-center">Annuel</th>
+                              <th class="text-center">Mensuel</th>
                             </tr>
                           </thead>
                           <tbody>
                             <tr>
                               <td>Seuil de ressources <strong>Q1</strong> de l'EPCI (UC) :</td>
-                              <td id="seuilQ1Annuel">-</td>
-                              <td id="seuilQ1Mensuel">-</td>
+                              <td id="seuilQ1Annuel" class="text-center">-</td>
+                              <td id="seuilQ1Mensuel" class="text-center">-</td>
                             </tr>
                             <tr>
                               <td>Seuil de ressources <strong>Q2</strong> de l'EPCI (UC) :</td>
-                              <td id="seuilQ2Annuel">-</td>
-                              <td id="seuilQ2Mensuel">-</td>
+                              <td id="seuilQ2Annuel" class="text-center">-</td>
+                              <td id="seuilQ2Mensuel" class="text-center">-</td>
                             </tr>
                             <tr>
                               <td>Seuil de ressources <strong>Q3</strong> de l'EPCI (UC) :</td>
-                              <td id="seuilQ3Annuel">-</td>
-                              <td id="seuilQ3Mensuel">-</td>
+                              <td id="seuilQ3Annuel" class="text-center">-</td>
+                              <td id="seuilQ3Mensuel" class="text-center">-</td>
                             </tr>
                           </tbody>
                         </table>
-                        <p class="text-danger small mt-2">
+                        <p class="text-danger small mt-2" text-center fst-italic>
                           Si l’EPCI recherché ne se trouve pas dans cette liste, c’est qu’il n’est pas concerné par l’obligation d’attribuer 25 % des logements hors QPV aux ménages du premier quartile en 2025.
                         </p>
                       </div>
@@ -196,19 +200,19 @@ Parution au JORF du 7 juin 2025.
                   <div class="col-lg-10">
                     <div class="row justify-content-center mb-4" data-aos="fade-up" data-aos-delay="100">
                       <h4 class="fw-bold" style="color: #0ea2bd;">2 - Composition du ménage + ressources déclarées</h4>
-                      <label>Titulaire de la demande : </label>
+                      <label class="fw-bold">Titulaire de la demande : </label>
                       <input type="number" min="1" id="titulaire" class="form-control mb-2" value="1">
             
-                      <label>Co-titulaire : </label>
+                      <label class="fw-bold">Co-titulaire : </label>
                       <input type="number" min="0" id="co-titulaire" class="form-control mb-2" placeholder="Nombre de co-titulaires">
             
-                      <label>Enfant(s) de 14 ans et/ou plus : </label>
+                      <label class="fw-bold">Enfant(s) de 14 ans et/ou plus : </label>
                       <input type="number" min="0" id="enfant14" class="form-control mb-2" placeholder="Nombre d'enfants de 14 ans et/ou plus">
             
-                      <label>Enfant(s) de moins de 14 ans : </label>
+                      <label class="fw-bold">Enfant(s) de moins de 14 ans : </label>
                       <input type="number" min="0" id="enfant13" class="form-control mb-2" placeholder="Nombre d'enfants de moins de 14 ans">
             
-                      <label>Ressources mensuelles du foyer (en €) : </label>
+                      <label class="fw-bold">Ressources mensuelles du foyer (en €) : </label>
                       <input type="number" min="0" id="ressources" class="form-control" placeholder="Montant total du foyer">
                     </div>
                   </div>
@@ -295,8 +299,8 @@ function calculerLEC() {
     const rmuc = uc > 0 ? ressources / uc : 0;
     const revenuAnnuel = rmuc * 12;
 
-    document.getElementById("rmucMensuel").textContent = `Soit ressources mensuelles par UC : ${rmuc.toFixed(2).toLocaleString("fr-FR")} €`;
-    document.getElementById("rmucAnnuel").textContent = `Soit ressources annuelles par UC : ${revenuAnnuel.toFixed(2).toLocaleString("fr-FR")} €`;
+    document.getElementById("rmucMensuel").innerHTML = `<p class="text-center">Soit ressources mensuelles par UC : <strong>${rmuc.toFixed(2).toLocaleString("fr-FR")} €</strong></p>`;
+    document.getElementById("rmucAnnuel").innerHTML = `<p class="text-center">Soit ressources annuelles par UC : <strong>${revenuAnnuel.toFixed(2).toLocaleString("fr-FR")} €</strong></p>`;
 
     const seuil = dataQuartiles.find(e =>
       e.Region === region &&
@@ -306,7 +310,28 @@ function calculerLEC() {
 
     const resultatBox = document.getElementById("resultatLEC");
     const totalPersonnes = titulaire + cotitulaire + enfant14 + enfant13;
-    document.getElementById("compositionMénage").textContent = `Ménage composé de ${totalPersonnes} personne(s) au total.`;
+    let phraseComposition = "Ménage composé de";
+let morceaux = [];
+
+if (titulaire > 0) {
+  morceaux.push(`${titulaire} titulaire${titulaire > 1 ? 's' : ''} de la demande`);
+}
+if (cotitulaire > 0) {
+  morceaux.push(`${cotitulaire} co-titulaire${cotitulaire > 1 ? 's' : ''}`);
+}
+if (enfant14 > 0) {
+  morceaux.push(`${enfant14} enfant${enfant14 > 1 ? 's' : ''} de 14 ans ou plus`);
+}
+if (enfant13 > 0) {
+  morceaux.push(`${enfant13} enfant${enfant13 > 1 ? 's' : ''} de moins de 14 ans`);
+}
+
+phraseComposition += " " + morceaux.join(", ") + ".";
+
+const compo = document.getElementById("compositionMénage");
+compo.textContent = phraseComposition;
+compo.classList.add("text-center");
+
 
     if (!seuil || uc === 0 || ressources === 0) {
       resultatBox.textContent = "Merci de remplir tous les champs correctement.";
@@ -344,9 +369,9 @@ function calculerLEC() {
     quartileBox.className = `alert ${boxClass} text-center fw-bold fs-5`;
     quartileBox.classList.remove("d-none");
 
-    resultatBox.textContent = `RMUC annuel : ${Math.round(revenuAnnuel).toLocaleString()} € | Seuil Q1 : ${Math.round(seuilQ1).toLocaleString()} € → ${revenuAnnuel <= seuilQ1 ? "Éligible (Q1)" : "Hors Q1"}`;
+    resultatBox.textContent = `Ressources du ménage/UC annuel : ${Math.round(revenuAnnuel).toLocaleString()} € | Seuil Q1 : ${Math.round(seuilQ1).toLocaleString()} € → ${revenuAnnuel <= seuilQ1 ? "Éligible Q1" : "Hors Q1"}`;
     resultatBox.classList.remove("d-none", "alert-warning");
-    resultatBox.classList.add(revenuAnnuel <= seuilQ1 ? "alert-success" : "alert-danger");
+    resultatBox.classList.add(revenuAnnuel <= seuilQ1 ? "alert-success" : "alert-danger", "text-center");
   }
 
   function afficherSeuils(seuil) {
