@@ -230,118 +230,129 @@ Parution au JORF du 7 juin 2025.
             <!-- Fichier contenant les données annuelles Q1, Q2, Q3 -->
             <script src="assets/data/dataQuartiles_script.js"></script>
             
-            <script>
-              function chargerQuartiles() {
-                const selectRegion = document.getElementById("region");
-                const regions = [...new Set(dataQuartiles.map(e => e.Region))].sort();
-		selectRegion.innerHTML = '<option value="">-- Choisir une région --</option>';
-                regions.forEach(r => {
-                  const option = document.createElement("option");
-                  option.value = r;
-                  option.textContent = r;
-                  selectRegion.appendChild(option);
-                });
-            
-                selectRegion.addEventListener("change", () => {
-                  const region = selectRegion.value;
-                  const departements = [...new Set(dataQuartiles.filter(e => e.Region === region).map(e => e.Departement))].sort();
-                  const selectDept = document.getElementById("departement");
-                  selectDept.innerHTML = '<option value="">-- Choisir un département --</option>';
-                  departements.forEach(d => {
-                    const opt = document.createElement("option");
-                    opt.value = d;
-                    opt.textContent = d;
-                    selectDept.appendChild(opt);
-                  });
-                });
-            
-                document.getElementById("departement").addEventListener("change", () => {
-                  const region = document.getElementById("region").value;
-                  const dept = document.getElementById("departement").value;
-                  const epcis = dataQuartiles.filter(e => e.Region === region && e.Departement === dept).map(e => e.EPCI).sort();
-                  const selectEPCI = document.getElementById("epci");
-                  selectEPCI.innerHTML = '<option value="">-- Choisir un EPCI --</option>';
-                  epcis.forEach(ep => {
-                    const opt = document.createElement("option");
-                    opt.value = ep;
-                    opt.textContent = ep;
-                    selectEPCI.appendChild(opt);
-                  });
-                });
-              }
-            
-              function calculerLEC() {
-                const region = document.getElementById("region").value;
-                const dept = document.getElementById("departement").value;
-                const epci = document.getElementById("epci").value;
-                const titulaire = parseFloat(document.getElementById("titulaire").value) || 0;
-                const cotitulaire = parseFloat(document.getElementById("co-titulaire").value) || 0;
-                const enfant14 = parseFloat(document.getElementById("enfant14").value) || 0;
-                const enfant13 = parseFloat(document.getElementById("enfant13").value) || 0;
-                const ressources = parseFloat(document.getElementById("ressources").value) || 0;
-            
-                const uc = (titulaire + cotitulaire) + enfant14 * 0.5 + enfant13 * 0.3;
-                const rmuc = uc > 0 ? ressources / uc : 0;
-            
-                const seuil = dataQuartiles.find(e => e.Region === region && e.Departement === dept && e.EPCI === epci);
-                const seuilQ1 = seuil ? parseFloat(seuil["Seuil Q1 2025"]) : null;
-            
-                if (seuil) afficherSeuils(seuil);
-            
-                const resultatBox = document.getElementById("resultatLEC");
-                if (!seuilQ1 || uc === 0 || ressources === 0) {
-                  resultatBox.textContent = "Merci de remplir tous les champs correctement.";
-                  resultatBox.classList.remove("d-none", "alert-success", "alert-danger");
-                  resultatBox.classList.add("alert-warning");
-                  return;
-                }
-            
-                resultatBox.textContent = RMUC : ${Math.round(rmuc).toLocaleString()} € | Seuil Q1 : ${Math.round(seuilQ1).toLocaleString()} € → ${rmuc <= seuilQ1 ? "Éligible (Q1)" : "Hors Q1"};
-                resultatBox.classList.remove("d-none", "alert-warning");
-                resultatBox.classList.add(rmuc <= seuilQ1 ? "alert-success" : "alert-danger");
-              }
-            
-              function afficherSeuils(seuil) {
-                const formatter = new Intl.NumberFormat('fr-FR', {
-                  style: 'currency',
-                  currency: 'EUR',
-                  minimumFractionDigits: 0
-                });
-              
-                const seuilQ1 = parseFloat(seuil["Seuil Q1 2025"]) || 0;
-                const seuilQ2 = parseFloat(seuil["Seuil Q2 2025"]) || 0;
-                const seuilQ3 = parseFloat(seuil["Seuil Q3 2025"]) || 0;
-              
-                document.getElementById("seuilQ1Annuel").textContent = formatter.format(seuilQ1);
-                document.getElementById("seuilQ1Mensuel").textContent = formatter.format(parseFloat((seuilQ1 / 12).toFixed(2)));
-              
-                document.getElementById("seuilQ2Annuel").textContent = formatter.format(seuilQ2);
-                document.getElementById("seuilQ2Mensuel").textContent = formatter.format(parseFloat((seuilQ2 / 12).toFixed(2)));
-              
-                document.getElementById("seuilQ3Annuel").textContent = formatter.format(seuilQ3);
-                document.getElementById("seuilQ3Mensuel").textContent = formatter.format(parseFloat((seuilQ3 / 12).toFixed(2)));
-              
-                document.getElementById("seuils-info").classList.remove("d-none");
-              }
-            
-              function resetLEC() {
-                document.getElementById("region").value = "";
-                document.getElementById("departement").innerHTML = "";
-                document.getElementById("epci").innerHTML = "";
-                document.getElementById("titulaire").value = "";
-                document.getElementById("co-titulaire").value = "";
-                document.getElementById("enfant14").value = "";
-                document.getElementById("enfant13").value = "";
-                document.getElementById("ressources").value = "";
-                document.getElementById("resultatLEC").classList.add("d-none");
-                document.getElementById("seuils-info").classList.add("d-none");
-              }
+<script>
+  function chargerQuartiles() {
+    const selectRegion = document.getElementById("region");
+    const regions = [...new Set(dataQuartiles.map(e => e.Region))].sort();
+    selectRegion.innerHTML = '<option value="">-- Choisir une région --</option>';
+    regions.forEach(r => {
+      const option = document.createElement("option");
+      option.value = r;
+      option.textContent = r;
+      selectRegion.appendChild(option);
+    });
 
-								document.addEventListener("DOMContentLoaded", function () {
-									    chargerQuartiles();
-									  });
+    selectRegion.addEventListener("change", () => {
+      const region = selectRegion.value;
+      const departements = [...new Set(dataQuartiles
+        .filter(e => e.Region === region)
+        .map(e => e.Departement))].sort();
 
-            </script>
+      const selectDept = document.getElementById("departement");
+      selectDept.innerHTML = '<option value="">-- Choisir un département --</option>';
+      departements.forEach(d => {
+        const opt = document.createElement("option");
+        opt.value = d;
+        opt.textContent = d;
+        selectDept.appendChild(opt);
+      });
+    });
+
+    document.getElementById("departement").addEventListener("change", () => {
+      const region = document.getElementById("region").value;
+      const dept = document.getElementById("departement").value;
+      const epcis = dataQuartiles
+        .filter(e => e.Region === region && e.Departement === dept)
+        .map(e => e.EPCI)
+        .sort();
+
+      const selectEPCI = document.getElementById("epci");
+      selectEPCI.innerHTML = '<option value="">-- Choisir un EPCI --</option>';
+      epcis.forEach(ep => {
+        const opt = document.createElement("option");
+        opt.value = ep;
+        opt.textContent = ep;
+        selectEPCI.appendChild(opt);
+      });
+    });
+  }
+
+  function calculerLEC() {
+    const region = document.getElementById("region").value;
+    const dept = document.getElementById("departement").value;
+    const epci = document.getElementById("epci").value;
+    const titulaire = parseFloat(document.getElementById("titulaire").value) || 0;
+    const cotitulaire = parseFloat(document.getElementById("co-titulaire").value) || 0;
+    const enfant14 = parseFloat(document.getElementById("enfant14").value) || 0;
+    const enfant13 = parseFloat(document.getElementById("enfant13").value) || 0;
+    const ressources = parseFloat(document.getElementById("ressources").value) || 0;
+
+    const uc = (titulaire + cotitulaire) + enfant14 * 0.5 + enfant13 * 0.3;
+    const rmuc = uc > 0 ? ressources / uc : 0;
+
+    const seuil = dataQuartiles.find(e =>
+      e.Region === region &&
+      e.Departement === dept &&
+      e.EPCI === epci
+    );
+
+    const seuilQ1 = seuil ? parseFloat(seuil["Seuil Q1 2025"]) : null;
+
+    if (seuil) afficherSeuils(seuil);
+
+    const resultatBox = document.getElementById("resultatLEC");
+    if (!seuilQ1 || uc === 0 || ressources === 0) {
+      resultatBox.textContent = "Merci de remplir tous les champs correctement.";
+      resultatBox.classList.remove("d-none", "alert-success", "alert-danger");
+      resultatBox.classList.add("alert-warning");
+      return;
+    }
+
+    resultatBox.textContent = `RMUC : ${Math.round(rmuc).toLocaleString()} € | Seuil Q1 : ${Math.round(seuilQ1).toLocaleString()} € → ${rmuc <= seuilQ1 ? "Éligible (Q1)" : "Hors Q1"}`;
+    resultatBox.classList.remove("d-none", "alert-warning");
+    resultatBox.classList.add(rmuc <= seuilQ1 ? "alert-success" : "alert-danger");
+  }
+
+  function afficherSeuils(seuil) {
+    const formatter = new Intl.NumberFormat('fr-FR', {
+      style: 'currency',
+      currency: 'EUR',
+      minimumFractionDigits: 0
+    });
+
+    const seuilQ1 = parseFloat(seuil["Seuil Q1 2025"]) || 0;
+    const seuilQ2 = parseFloat(seuil["Seuil Q2 2025"]) || 0;
+    const seuilQ3 = parseFloat(seuil["Seuil Q3 2025"]) || 0;
+
+    document.getElementById("seuilQ1Annuel").textContent = formatter.format(seuilQ1);
+    document.getElementById("seuilQ1Mensuel").textContent = formatter.format(parseFloat((seuilQ1 / 12).toFixed(2)));
+
+    document.getElementById("seuilQ2Annuel").textContent = formatter.format(seuilQ2);
+    document.getElementById("seuilQ2Mensuel").textContent = formatter.format(parseFloat((seuilQ2 / 12).toFixed(2)));
+
+    document.getElementById("seuilQ3Annuel").textContent = formatter.format(seuilQ3);
+    document.getElementById("seuilQ3Mensuel").textContent = formatter.format(parseFloat((seuilQ3 / 12).toFixed(2)));
+
+    document.getElementById("seuils-info").classList.remove("d-none");
+  }
+
+  function resetLEC() {
+    document.getElementById("region").value = "";
+    document.getElementById("departement").innerHTML = "";
+    document.getElementById("epci").innerHTML = "";
+    document.getElementById("titulaire").value = "";
+    document.getElementById("co-titulaire").value = "";
+    document.getElementById("enfant14").value = "";
+    document.getElementById("enfant13").value = "";
+    document.getElementById("ressources").value = "";
+    document.getElementById("resultatLEC").classList.add("d-none");
+    document.getElementById("seuils-info").classList.add("d-none");
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    chargerQuartiles();
+  });
+</script>
 
           </div>
       </div>
