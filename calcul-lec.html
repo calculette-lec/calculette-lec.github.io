@@ -160,12 +160,13 @@
                       <label for="departement"><strong>Sélectionnez un département :</strong></label>
                       <select id="departement" class="form-select mb-3"></select>
             
-                      <label for="epci"><strong>Sélectionnez un EPCI :</label>
+                      <label for="epci"><strong>Sélectionnez un EPCI :</strong></label>
                       <select id="epci" class="form-select mb-3"></select>
 
                       <!-- Seuils -->
                       <div id="seuils-info" class="mt-4 p-3 bg-white border rounded d-none">
                         <h5 style="color: #0ea2bd;"><strong>Montants des seuils 2025 :</strong></h5>
+                      
                         <table class="table table-sm table-bordered mt-2">
                           <thead class="table-light fw-bold">
                             <tr>
@@ -176,49 +177,91 @@
                           </thead>
                           <tbody>
                             <tr>
-                              <td>Seuil de ressources <strong>Q1</strong> de l'EPCI (UC) :</td>
-                              <td id="seuilQ1Annuel" class="text-center">-</td>
-                              <td id="seuilQ1Mensuel" class="text-center">-</td>
+                              <td>Seuil de ressources <span class="fw-bold">Q1</span> de l'EPCI (UC) :</td>
+                              <td id="seuilQ1Annuel" class="text-center fw-bold">-</td>
+                              <td id="seuilQ1Mensuel" class="text-center fw-bold">-</td>
                             </tr>
                             <tr>
-                              <td>Seuil de ressources <strong>Q2</strong> de l'EPCI (UC) :</td>
-                              <td id="seuilQ2Annuel" class="text-center">-</td>
-                              <td id="seuilQ2Mensuel" class="text-center">-</td>
+                              <td>Seuil de ressources <span class="fw-bold">Q2</span> de l'EPCI (UC) :</td>
+                              <td id="seuilQ2Annuel" class="text-center fw-bold">-</td>
+                              <td id="seuilQ2Mensuel" class="text-center fw-bold">-</td>
                             </tr>
                             <tr>
-                              <td>Seuil de ressources <strong>Q3</strong> de l'EPCI (UC) :</td>
-                              <td id="seuilQ3Annuel" class="text-center">-</td>
-                              <td id="seuilQ3Mensuel" class="text-center">-</td>
+                              <td>Seuil de ressources <span class="fw-bold">Q3</span> de l'EPCI (UC) :</td>
+                              <td id="seuilQ3Annuel" class="text-center fw-bold">-</td>
+                              <td id="seuilQ3Mensuel" class="text-center fw-bold">-</td>
                             </tr>
                           </tbody>
                         </table>
-                        <p class="text-danger small mt-2 text-center fst-italic">
+                      
+                        <p class="text-danger small mt-2 text-center fst-italic fw-normal">
                           Si l’EPCI recherché ne se trouve pas dans cette liste, c’est qu’il n’est pas concerné par l’obligation d’attribuer 25 % des logements hors QPV aux ménages du premier quartile en 2025.
                         </p>
                       </div>
+
+            
+                    <!-- Bloc 2 -->
+                    <div class="col-lg-10">
+                      <div class="row justify-content-center mb-4" data-aos="fade-up" data-aos-delay="100">
+                        <h4 class="fw-bold" style="color: #0ea2bd;">2 - Composition du ménage + ressources déclarées</h4>
+                        <label class="fw-bold">Titulaire de la demande : </label>
+                        <input type="number" min="1" id="titulaire" class="form-control mb-2" value="1" readonly>
+                    
+                        <label class="fw-bold">Co-titulaire : </label>
+                        <input type="number" min="0" id="co-titulaire" class="form-control mb-2" placeholder="Nombre de co-titulaires">
+                    
+                        <label class="fw-bold">Enfant(s) de 14 ans et plus : </label>
+                        <input type="number" min="0" id="enfant14" class="form-control mb-2" placeholder="Nombre d'enfants de 14 ans et plus">
+                    
+                        <label class="fw-bold">Enfant(s) de moins de 14 ans : </label>
+                        <input type="number" min="0" id="enfant13" class="form-control mb-2" placeholder="Nombre d'enfants de moins de 14 ans">
+                    
+                        <label class="fw-bold">Ressources mensuelles du foyer (en €) : </label>
+                        <input type="number" min="0" id="ressources" class="form-control" placeholder="Montant total du foyer">
+                      </div>
+                    
+                      <!-- Tableau UC -->
+                      <div id="uc-calcul" class="mt-4 p-3 bg-light border rounded d-none">
+                        <h5 style="color: #0ea2bd;"><strong>Détail du calcul des UC :</strong></h5>
+                        <table class="table table-sm table-bordered">
+                          <thead class="table-light fw-bold text-center">
+                            <tr>
+                              <th>Composition du ménage</th>
+                              <th>Nombre de personnes</th>
+                              <th>Nombre d'UC</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>Titulaire de la demande</td>
+                              <td class="text-center">1</td>
+                              <td class="text-center">1,0</td>
+                            </tr>
+                            <tr>
+                              <td>Co-titulaire</td>
+                              <td class="text-center" id="nbCotitulaire">0</td>
+                              <td class="text-center" id="ucCotitulaire">0,0</td>
+                            </tr>
+                            <tr>
+                              <td>Enfants âgés de 14 ans et plus</td>
+                              <td class="text-center" id="nbEnfant14">0</td>
+                              <td class="text-center" id="ucEnfant14">0,0</td>
+                            </tr>
+                            <tr>
+                              <td>Enfants âgés de moins de 14 ans</td>
+                              <td class="text-center" id="nbEnfant13">0</td>
+                              <td class="text-center" id="ucEnfant13">0,0</td>
+                            </tr>
+                            <tr class="table-info fw-bold">
+                              <td>TOTAL</td>
+                              <td class="text-center" id="totalPersonnes">1</td>
+                              <td class="text-center" id="totalUC">1,0</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
                     </div>
-                  </div>
-            
-                  <!-- Bloc 2 -->
-                  <div class="col-lg-10">
-                    <div class="row justify-content-center mb-4" data-aos="fade-up" data-aos-delay="100">
-                      <h4 class="fw-bold" style="color: #0ea2bd;">2 - Composition du ménage + ressources déclarées</h4>
-                      <label class="fw-bold">Titulaire de la demande : </label>
-                      <input type="number" min="1" id="titulaire" class="form-control mb-2" value="1" readonly>
-            
-                      <label class="fw-bold">Co-titulaire : </label>
-                      <input type="number" min="0" id="co-titulaire" class="form-control mb-2" placeholder="Nombre de co-titulaires">
-            
-                      <label class="fw-bold">Enfant(s) de 14 ans et plus : </label>
-                      <input type="number" min="0" id="enfant14" class="form-control mb-2" placeholder="Nombre d'enfants de 14 ans et plus">
-            
-                      <label class="fw-bold">Enfant(s) de moins de 14 ans : </label>
-                      <input type="number" min="0" id="enfant13" class="form-control mb-2" placeholder="Nombre d'enfants de moins de 14 ans">
-            
-                      <label class="fw-bold">Ressources mensuelles du foyer (en €) : </label>
-                      <input type="number" min="0" id="ressources" class="form-control" placeholder="Montant total du foyer">
-                    </div>
-                  </div>
+
             
                   <!-- Bloc 3 -->
                   <div class="col-lg-10">
@@ -423,6 +466,51 @@ compo.classList.add("text-center");
     chargerQuartiles();
   });
 </script>
+
+        <script>
+  function calculerUC() {
+    const titulaire = 1; // toujours 1
+    const cotitulaire = parseInt(document.getElementById("co-titulaire").value) || 0;
+    const enfant14 = parseInt(document.getElementById("enfant14").value) || 0;
+    const enfant13 = parseInt(document.getElementById("enfant13").value) || 0;
+
+    // UC par catégorie
+    const ucTit = 1.0;
+    const ucCoti = cotitulaire * 0.5;
+    const ucE14 = enfant14 * 0.5;
+    const ucE13 = enfant13 * 0.3;
+
+    const nbPers = titulaire + cotitulaire + enfant14 + enfant13;
+    const totalUC = ucTit + ucCoti + ucE14 + ucE13;
+
+    // Mise à jour des cellules
+    document.getElementById("nbTitulaire").textContent = titulaire;
+    document.getElementById("ucTitulaire").textContent = ucTit.toFixed(1).replace('.', ',');
+
+    document.getElementById("nbCotitulaire").textContent = cotitulaire;
+    document.getElementById("ucCotitulaire").textContent = ucCoti.toFixed(1).replace('.', ',');
+
+    document.getElementById("nbEnfant14").textContent = enfant14;
+    document.getElementById("ucEnfant14").textContent = ucE14.toFixed(1).replace('.', ',');
+
+    document.getElementById("nbEnfant13").textContent = enfant13;
+    document.getElementById("ucEnfant13").textContent = ucE13.toFixed(1).replace('.', ',');
+
+    document.getElementById("nbTotal").textContent = nbPers;
+    document.getElementById("ucTotal").textContent = totalUC.toFixed(1).replace('.', ',');
+    document.getElementById("uc-calcul").classList.remove("d-none");
+
+  }
+
+  // Écoute des champs
+  ["co-titulaire", "enfant14", "enfant13"].forEach(id => {
+    document.getElementById(id).addEventListener("input", calculerUC);
+  });
+
+  // Initialisation au chargement
+  document.addEventListener("DOMContentLoaded", calculerUC);
+</script>
+
 
           </div>
       </div>
