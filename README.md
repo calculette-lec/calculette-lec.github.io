@@ -12,6 +12,7 @@ Ce site web interactif permet de **calculer le quartile de ressources** (Q1, Q2,
 - Résultat instantané du quartile selon les ressources déclarées
 - Affichage pédagogique des ressources/UC mensuelles et annuelles
 - Compatible mobile et tablette (responsive)
+- Bonus : quelques statistiques nationales et régionales (partie Évolutions)
 
 ## 🧮 Règles de calcul UC
 
