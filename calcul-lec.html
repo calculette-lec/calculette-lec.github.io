@@ -151,7 +151,7 @@
                 <div class="row gy-4" data-aos="fade-up" data-aos-delay="100">
             
                   <!-- Bloc 1 -->
-                  <div class="col-lg-10">
+                  <div class="col-lg-12 col-xl-10">
                     <div class="row justify-content-center mb-4" data-aos="fade-up" data-aos-delay="100">
                       <h4 class="fw-bold" style="color: #0ea2bd;">1 - Territoire</h4>
                       <label for="region"><strong>Sélectionnez une région :</strong></label>
@@ -200,7 +200,7 @@
                   </div>
             
                   <!-- Bloc 2 -->
-                  <div class="col-lg-10">
+                  <div class="col-lg-12 col-xl-10">
                     <div class="row justify-content-center mb-4" data-aos="fade-up" data-aos-delay="100">
                       <h4 class="fw-bold" style="color: #0ea2bd;">2 - Composition du ménage + ressources déclarées</h4>
                       <label class="fw-bold">Titulaire de la demande : </label>
@@ -221,9 +221,48 @@
                   </div>
             
                   <!-- Bloc 3 -->
-                  <div class="col-lg-10">
+                  <div class="col-lg-12 col-xl-10">
                     <div class="row justify-content-center mb-4" data-aos="fade-up" data-aos-delay="100">
                       <h4 class="fw-bold" style="color: #0ea2bd;">3 - Récapitulatif</h4>
+                        <div class="table-responsive">
+                          <table class="table table-bordered text-center">
+                            <thead class="table-light">
+                              <tr>
+                                <th>Type de personne</th>
+                                <th>Nombre</th>
+                                <th>Unités de consommation (UC)</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>Titulaire</td>
+                                <td id="nb-titulaire">1</td>
+                                <td id="uc-titulaire">1</td>
+                              </tr>
+                              <tr>
+                                <td>Co-titulaire</td>
+                                <td id="nb-cotitulaire">0</td>
+                                <td id="uc-cotitulaire">0</td>
+                              </tr>
+                              <tr>
+                                <td>Enfants ≥14 ans</td>
+                                <td id="nb-enfant14">0</td>
+                                <td id="uc-enfant14">0</td>
+                              </tr>
+                              <tr>
+                                <td>Enfants <14 ans</td>
+                                <td id="nb-enfant13">0</td>
+                                <td id="uc-enfant13">0</td>
+                              </tr>
+                              <tr class="fw-bold">
+                                <td>Total</td>
+                                <td id="total-personnes">0</td>
+                                <td id="total-uc">0</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+
                       <p id="compositionMénage" class="mb-2 fw-semibold"></p>
                       <div id="quartileBox" class="alert d-none text-center fw-bold fs-5" style="padding: 15px; border: 2px solid #ccc; border-radius: 6px;"></div>
                       <button onclick="calculerLEC()" class="btn w-100 mb-3" style="background-color:#0ea2bd; color:white">Calculer</button>
@@ -301,6 +340,19 @@ function calculerLEC() {
     const uc = (titulaire + cotitulaire) + enfant14 * 0.5 + enfant13 * 0.3;
     const rmuc = uc > 0 ? ressources / uc : 0;
     const revenuAnnuel = rmuc * 12;
+    document.getElementById("nb-titulaire").textContent = titulaire;
+    document.getElementById("nb-cotitulaire").textContent = cotitulaire;
+    document.getElementById("nb-enfant14").textContent = enfant14;
+    document.getElementById("nb-enfant13").textContent = enfant13;
+    
+    document.getElementById("uc-titulaire").textContent = titulaire.toFixed(1);
+    document.getElementById("uc-cotitulaire").textContent = cotitulaire.toFixed(1);
+    document.getElementById("uc-enfant14").textContent = (enfant14 * 0.5).toFixed(1);
+    document.getElementById("uc-enfant13").textContent = (enfant13 * 0.3).toFixed(1);
+    
+    document.getElementById("total-personnes").textContent = (titulaire + cotitulaire + enfant14 + enfant13);
+    document.getElementById("total-uc").textContent = uc.toFixed(1);
+
 
     document.getElementById("rmucMensuel").innerHTML = `<p class="text-center fst-italic">Soit ressources mensuelles par UC : ${rmuc.toFixed(2).toLocaleString("fr-FR")} €</p>`;
     document.getElementById("rmucAnnuel").innerHTML = `<p class="text-center fst-italic">Soit ressources annuelles par UC : ${revenuAnnuel.toFixed(2).toLocaleString("fr-FR")} €</p>`;
@@ -323,7 +375,7 @@ if (cotitulaire > 0) {
   morceaux.push(`${cotitulaire} co-titulaire${cotitulaire > 1 ? 's' : ''}`);
 }
 if (enfant14 > 0) {
-  morceaux.push(`${enfant14} enfant${enfant14 > 1 ? 's' : ''} de 14 ans ou plus`);
+  morceaux.push(`${enfant14} enfant${enfant14 > 1 ? 's' : ''} de 14 ans et plus`);
 }
 if (enfant13 > 0) {
   morceaux.push(`${enfant13} enfant${enfant13 > 1 ? 's' : ''} de moins de 14 ans`);
@@ -372,7 +424,7 @@ compo.classList.add("text-center");
     quartileBox.className = `alert ${boxClass} text-center fw-bold fs-5`;
     quartileBox.classList.remove("d-none");
 
-    resultatBox.textContent = `Ressources du ménage/UC annuel : ${Math.round(revenuAnnuel).toLocaleString()} € | Seuil Q1 : ${Math.round(seuilQ1).toLocaleString()} € → ${revenuAnnuel <= seuilQ1 ? "Éligible Q1" : "Hors Q1"}`;
+    resultatBox.textContent = `Seuil Q1 : ${Math.round(seuilQ1).toLocaleString()} € → ${revenuAnnuel <= seuilQ1 ? "Éligible Q1" : "Hors Q1"}`;
     resultatBox.classList.remove("d-none", "alert-warning");
     resultatBox.classList.add(revenuAnnuel <= seuilQ1 ? "alert-success" : "alert-danger", "text-center");
   }
