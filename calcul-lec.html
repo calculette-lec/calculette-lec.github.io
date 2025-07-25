@@ -160,7 +160,7 @@
                       <label for="departement"><strong>Sélectionnez un département :</strong></label>
                       <select id="departement" class="form-select mb-3"></select>
             
-                      <label for="epci"><strong>Sélectionnez un EPCI :</strong></label>
+                      <label for="epci"><strong>Sélectionnez un EPCI :<strong></label>
                       <select id="epci" class="form-select mb-3"></select>
 
                       <!-- Seuils -->
@@ -193,92 +193,52 @@
                             </tr>
                           </tbody>
                         </table>
-                      
-                        <p class="text-danger small mt-2 text-center fst-italic fw-normal">
-                          Si l’EPCI recherché ne se trouve pas dans cette liste, c’est qu’il n’est pas concerné par l’obligation d’attribuer 25 % des logements hors QPV aux ménages du premier quartile en 2025.
-                        </p>
-                      </div>
+
+  <p class="text-danger small mt-2 text-center fst-italic fw-normal">
+    Si l’EPCI recherché ne se trouve pas dans cette liste, c’est qu’il n’est pas concerné par l’obligation d’attribuer 25 % des logements hors QPV aux ménages du premier quartile en 2025.
+  </p>
+</div>
+
+
 
             
-                      <!-- Bloc 2 -->
-                      <div class="col-lg-10">
-                        <div class="row justify-content-center mb-4" data-aos="fade-up" data-aos-delay="100">
-                          <h4 class="fw-bold" style="color: #0ea2bd;">2 - Composition du ménage et ressources déclarées</h4>
-                              <label class="fw-bold">Titulaire de la demande : </label>
-                              <input type="number" min="1" id="titulaire" class="form-control mb-2" value="1" readonly>
-                      
-                              <label class="fw-bold">Co-titulaire : </label>
-                              <input type="number" min="0" id="co-titulaire" class="form-control mb-2" placeholder="Nombre de co-titulaires">
-                      
-                              <label class="fw-bold">Enfant(s) de 14 ans et plus : </label>
-                              <input type="number" min="0" id="enfant14" class="form-control mb-2" placeholder="Nombre d'enfants de 14 ans et plus">
-                      
-                              <label class="fw-bold">Enfant(s) de moins de 14 ans : </label>
-                              <input type="number" min="0" id="enfant13" class="form-control mb-2" placeholder="Nombre d'enfants de moins de 14 ans">
-                      
-                              <label class="fw-bold">Ressources mensuelles du foyer (en €) : </label>
-                              <input type="number" min="0" id="ressources" class="form-control" placeholder="Montant total du foyer">
-                            </div>
-                      
-                      <!-- Tableau UC -->
-                      <div id="uc-calcul" class="mt-4 p-3 bg-light border rounded d-none">
-                        <h5 style="color: #0ea2bd;"><strong>Détail du calcul des UC :</strong></h5>
-                        <table class="table table-sm table-bordered">
-                          <thead class="table-light fw-bold text-center">
-                            <tr>
-                              <th>Composition du ménage</th>
-                              <th>Nombre de personnes</th>
-                              <th>Nombre d'UC</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <td>Titulaire de la demande</td>
-                              <td class="text-center">1</td>
-                              <td class="text-center">1,0</td>
-                            </tr>
-                            <tr>
-                              <td>Co-titulaire</td>
-                              <td class="text-center" id="nbCotitulaire">0</td>
-                              <td class="text-center" id="ucCotitulaire">0,0</td>
-                            </tr>
-                            <tr>
-                              <td>Enfants âgés de 14 ans et plus</td>
-                              <td class="text-center" id="nbEnfant14">0</td>
-                              <td class="text-center" id="ucEnfant14">0,0</td>
-                            </tr>
-                            <tr>
-                              <td>Enfants âgés de moins de 14 ans</td>
-                              <td class="text-center" id="nbEnfant13">0</td>
-                              <td class="text-center" id="ucEnfant13">0,0</td>
-                            </tr>
-                            <tr class="table-info fw-bold">
-                              <td>TOTAL</td>
-                              <td class="text-center" id="totalPersonnes">1</td>
-                              <td class="text-center" id="totalUC">1,0</td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-
+                  <!-- Bloc 2 -->
+                  <div class="col-lg-10">
+                    <div class="row justify-content-center mb-4" data-aos="fade-up" data-aos-delay="100">
+                      <h4 class="fw-bold" style="color: #0ea2bd;">2 - Composition du ménage + ressources déclarées</h4>
+                      <label class="fw-bold">Titulaire de la demande : </label>
+                      <input type="number" min="1" id="titulaire" class="form-control mb-2" value="1" readonly>
             
-                    <!-- Bloc 3 -->
-                    <div class="col-lg-10">
-                      <div class="row justify-content-center mb-4" data-aos="fade-up" data-aos-delay="100">
-                        <h4 class="fw-bold" style="color: #0ea2bd;">3 - Récapitulatif</h4>
-                            <p id="compositionMénage" class="mb-2 fw-semibold"></p>
-                            <div id="quartileBox" class="alert d-none text-center fw-bold fs-5" style="padding: 15px; border: 2px solid #ccc; border-radius: 6px;"></div>
-                            <button onclick="calculerLEC()" class="btn w-100 mb-3" style="background-color:#0ea2bd; color:white">Calculer</button>
-                            <button onclick="resetLEC()" class="btn btn-outline-secondary w-100 mb-3">Réinitialiser</button>
-                            <div id="resultatLEC" class="alert alert-info d-none"></div>
-                            <p id="rmucMensuel" class="mt-3 mb-1"></p>
-                            <p id="rmucAnnuel" class="mb-3"></p>
-                          </div>
-                        </div>
-                      </div>
+                      <label class="fw-bold">Co-titulaire : </label>
+                      <input type="number" min="0" id="co-titulaire" class="form-control mb-2" placeholder="Nombre de co-titulaires">
+            
+                      <label class="fw-bold">Enfant(s) de 14 ans et plus : </label>
+                      <input type="number" min="0" id="enfant14" class="form-control mb-2" placeholder="Nombre d'enfants de 14 ans et plus">
+            
+                      <label class="fw-bold">Enfant(s) de moins de 14 ans : </label>
+                      <input type="number" min="0" id="enfant13" class="form-control mb-2" placeholder="Nombre d'enfants de moins de 14 ans">
+            
+                      <label class="fw-bold">Ressources mensuelles du foyer (en €) : </label>
+                      <input type="number" min="0" id="ressources" class="form-control" placeholder="Montant total du foyer">
                     </div>
+                  </div>
+            
+                  <!-- Bloc 3 -->
+                  <div class="col-lg-10">
+                    <div class="row justify-content-center mb-4" data-aos="fade-up" data-aos-delay="100">
+                      <h4 class="fw-bold" style="color: #0ea2bd;">3 - Récapitulatif</h4>
+                      <p id="compositionMénage" class="mb-2 fw-semibold"></p>
+                      <div id="quartileBox" class="alert d-none text-center fw-bold fs-5" style="padding: 15px; border: 2px solid #ccc; border-radius: 6px;"></div>
+                      <button onclick="calculerLEC()" class="btn w-100 mb-3" style="background-color:#0ea2bd; color:white">Calculer</button>
+                      <button onclick="resetLEC()" class="btn btn-outline-secondary w-100 mb-3">Réinitialiser</button>
+                      <div id="resultatLEC" class="alert alert-info d-none"></div>
+                      <p id="rmucMensuel" class="mt-3 mb-1"></p>
+                      <p id="rmucAnnuel" class="mb-3"></p>
 
+                    </div>
+                  </div>
+            
+                </div>
             </section>
               
             <!-- Fichier contenant les données annuelles Q1, Q2, Q3 -->
@@ -467,51 +427,6 @@ compo.classList.add("text-center");
   });
 </script>
 
-        <script>
-  function calculerUC() {
-    const titulaire = 1; // toujours 1
-    const cotitulaire = parseInt(document.getElementById("co-titulaire").value) || 0;
-    const enfant14 = parseInt(document.getElementById("enfant14").value) || 0;
-    const enfant13 = parseInt(document.getElementById("enfant13").value) || 0;
-
-    // UC par catégorie
-    const ucTit = 1.0;
-    const ucCoti = cotitulaire * 0.5;
-    const ucE14 = enfant14 * 0.5;
-    const ucE13 = enfant13 * 0.3;
-
-    const nbPers = titulaire + cotitulaire + enfant14 + enfant13;
-    const totalUC = ucTit + ucCoti + ucE14 + ucE13;
-
-    // Mise à jour des cellules
-    document.getElementById("nbTitulaire").textContent = titulaire;
-    document.getElementById("ucTitulaire").textContent = ucTit.toFixed(1).replace('.', ',');
-
-    document.getElementById("nbCotitulaire").textContent = cotitulaire;
-    document.getElementById("ucCotitulaire").textContent = ucCoti.toFixed(1).replace('.', ',');
-
-    document.getElementById("nbEnfant14").textContent = enfant14;
-    document.getElementById("ucEnfant14").textContent = ucE14.toFixed(1).replace('.', ',');
-
-    document.getElementById("nbEnfant13").textContent = enfant13;
-    document.getElementById("ucEnfant13").textContent = ucE13.toFixed(1).replace('.', ',');
-
-    document.getElementById("nbTotal").textContent = nbPers;
-    document.getElementById("ucTotal").textContent = totalUC.toFixed(1).replace('.', ',');
-    document.getElementById("uc-calcul").classList.remove("d-none");
-
-  }
-
-  // Écoute des champs
-  ["co-titulaire", "enfant14", "enfant13"].forEach(id => {
-    document.getElementById(id).addEventListener("input", calculerUC);
-  });
-
-  // Initialisation au chargement
-  document.addEventListener("DOMContentLoaded", calculerUC);
-</script>
-
-
           </div>
       </div>
     </section><!-- /Calculette Section -->
@@ -547,51 +462,4 @@ compo.classList.add("text-center");
             <li><a href="#">Calcul LEC</a></li>
             <li><a href="#">Évolutions</a></li>
           </ul>
-        </div>
-
-        <div class="col-lg-4 col-md-12 footer-newsletter">
-          <h4>Newsletter</h4>
-          <p>Inscrivez-vous à notre newsletter pour ne rien manquer de nos actualités !</p>
-          <form action="forms/newsletter.php" method="post" class="php-email-form">
-            <div class="newsletter-form"><input type="email" name="email"><input type="submit" value="Souscrire"></div>
-            <div class="loading">Chargement en cours...</div>
-            <div class="error-message"></div>
-            <div class="sent-message">Vous avez souscrit à la newsletter de l'URH Hauts-de-France. Merci !</div>
-          </form>
-        </div>
-
-      </div>
-    </div>
-
-    <div class="container copyright text-center mt-4">
-      <p>© <span>Copyright</span> <strong class="px-1 sitename">Calculette LEC</strong><span>All Rights Reserved</span></p>
-      <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you've purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> Distributed by <a href="https://themewagon.com">ThemeWagon</a>
-      </div>
-    </div>
-
-  </footer>
-
-  <!-- Scroll Top -->
-  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
-  <!-- Preloader -->
-  <div id="preloader"></div>
-
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
-  <script src="assets/vendor/aos/aos.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-
-  <!-- Main JS File -->
-  <script src="assets/js/main.js"></script>
-
-</body>
-
-</html>
+   
