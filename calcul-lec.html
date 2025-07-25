@@ -201,11 +201,9 @@
 
             
                       <!-- Bloc 2 -->
-                      <div class="col-lg-12">
-                        <div class="row mt-4">
-                          <div class="col-lg-10">
-                            <div class="row justify-content-center mb-4" data-aos="fade-up" data-aos-delay="100">
-                              <h4 class="fw-bold" style="color: #0ea2bd;">2 - Composition du ménage + ressources déclarées</h4>
+                      <div class="col-lg-10">
+                        <div class="row justify-content-center mb-4" data-aos="fade-up" data-aos-delay="100">
+                          <h4 class="fw-bold" style="color: #0ea2bd;">2 - Composition du ménage et ressources déclarées</h4>
                               <label class="fw-bold">Titulaire de la demande : </label>
                               <input type="number" min="1" id="titulaire" class="form-control mb-2" value="1" readonly>
                       
@@ -222,12 +220,6 @@
                               <input type="number" min="0" id="ressources" class="form-control" placeholder="Montant total du foyer">
                             </div>
                       
-                            <!-- Tableau UC ici -->
-                          </div>
-                        </div>
-                      </div>
-
-                    
                       <!-- Tableau UC -->
                       <div id="uc-calcul" class="mt-4 p-3 bg-light border rounded d-none">
                         <h5 style="color: #0ea2bd;"><strong>Détail du calcul des UC :</strong></h5>
@@ -272,11 +264,9 @@
 
             
                     <!-- Bloc 3 -->
-                    <div class="col-lg-12">
-                      <div class="row">
-                        <div class="col-lg-10">
-                          <div class="row justify-content-center mb-4" data-aos="fade-up" data-aos-delay="100">
-                            <h4 class="fw-bold" style="color: #0ea2bd;">3 - Récapitulatif</h4>
+                    <div class="col-lg-10">
+                      <div class="row justify-content-center mb-4" data-aos="fade-up" data-aos-delay="100">
+                        <h4 class="fw-bold" style="color: #0ea2bd;">3 - Récapitulatif</h4>
                             <p id="compositionMénage" class="mb-2 fw-semibold"></p>
                             <div id="quartileBox" class="alert d-none text-center fw-bold fs-5" style="padding: 15px; border: 2px solid #ccc; border-radius: 6px;"></div>
                             <button onclick="calculerLEC()" class="btn w-100 mb-3" style="background-color:#0ea2bd; color:white">Calculer</button>
