@@ -1,6 +1,6 @@
-# Calculette LEC 2025 - URH Hauts-de-France
+# Calculette LEC 2026 - URH Hauts-de-France
 
-Ce site web interactif permet de **calculer le quartile de ressources** (Q1, Q2, Q3, Q4) d’un ménage demandeur de logement social, selon les seuils définis par l’**arrêté du 3 juin 2025**, dans le cadre de la **loi Égalité et Citoyenneté (LEC)**.
+Ce site web interactif permet de **calculer le quartile de ressources** (Q1, Q2, Q3, Q4) d’un ménage demandeur de logement social, selon les seuils définis par l’**arrêté du 23 avril 2026**, dans le cadre de la **loi Égalité et Citoyenneté (LEC) de janvier 2017**.
 
 > 📍 Outil développé par Laëtitia Deken – Union Régionale pour l’Habitat Hauts-de-France
 
@@ -32,12 +32,12 @@ Pour chaque nouvelle année :
 
 ## 📜 Sources officielles
 
-- [Arrêté du 3 juin 2025 – JORF n°0130 du 7 juin 2025](https://www.legifrance.gouv.fr/loda/id/JORFTEXT000051698932/)
+- [Arrêté du 3 juin 2025 – JORF n°0103 du 2 mai 2026](https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054022378)
 - Code de la construction et de l'habitation – Art. L. 441-1
 
 ## ✅ Statut du projet
 
-- Version actuelle : `v1.0 - Juillet 2025`
+- Version actuelle : `v2.0 - Août 2026`
 - Déploiement prévu sur GitHub Pages
 
 ## 📫 Contact
