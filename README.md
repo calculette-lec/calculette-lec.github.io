@@ -32,7 +32,7 @@ Pour chaque nouvelle année :
 
 ## 📜 Sources officielles
 
-- [Arrêté du 3 juin 2025 – JORF n°0103 du 2 mai 2026](https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054022378)
+- [Arrêté du 23 avril 2026 – JORF n°0103 du 2 mai 2026](https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054022378)
 - Code de la construction et de l'habitation – Art. L. 441-1
 
 ## ✅ Statut du projet
