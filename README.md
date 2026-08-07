@@ -1,4 +1,4 @@
-# Calculette LEC 2026 - URH Hauts-de-France
+# Calculette LEC - URH Hauts-de-France
 
 Ce site web interactif permet de **calculer le quartile de ressources** (Q1, Q2, Q3, Q4) d’un ménage demandeur de logement social, selon les seuils définis par l’**arrêté du 23 avril 2026**, dans le cadre de la **loi Égalité et Citoyenneté (LEC) de janvier 2017**.
 
