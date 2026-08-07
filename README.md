@@ -6,6 +6,7 @@ Ce site web interactif permet de **calculer le quartile de ressources** (Q1, Q2,
 
 ## 🔧 Fonctionnalités principales
 
+- Ajout des seuils des années 2024, 2025 et 2026
 - Sélection dynamique du territoire (Région → Département → EPCI)
 - Affichage des seuils de ressources Q1 / Q2 / Q3 (annuels et mensuels)
 - Calcul automatique des **unités de consommation (UC)** selon la composition familiale
