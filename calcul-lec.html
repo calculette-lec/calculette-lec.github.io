@@ -154,7 +154,7 @@
                             </p>
 
                             <!-- ⚠️ Mention d'avertissement ajoutée -->
-                            <p class="text-center text-danger fw-semibold">
+                            <p class="text-center fw-semibold" style="color: #e7392e;">
                                 ⚠️ Cette calculette a été conçue à l’origine pour un usage interne à l’Union Régionale pour l’Habitat Hauts-de-France. Elle est mise à disposition à titre informatif : l’URH Hauts-de-France ne saurait être tenue responsable d’éventuelles erreurs, omissions ou interprétations des résultats affichés.
                             </p>
 
@@ -186,7 +186,7 @@
                                         <!-- Bloc Territoire -->
                                         <div class="col-lg-12 col-xl-10">
                                             <div class="row justify-content-center mb-4" data-aos="fade-up" data-aos-delay="100">
-                                                <h4 class="fw-bold" style="color: #0ea2bd;">1 - Territoire</h4>
+                                                <h4 class="fw-bold" style="color: #005ca9;">1 - Territoire</h4>
                                                 <label for="region"><strong>Sélectionnez une région :</strong></label>
                                                 <select id="region" class="form-select mb-3"></select>
 
@@ -198,7 +198,7 @@
 
                                                 <!-- Seuils -->
                                                 <div id="seuils-info" class="mt-4 p-3 bg-white border rounded d-none">
-                                                    <h5 style="color: #0ea2bd;"><strong>Montants des seuils <span id="annee-seuils">2026</span> :</strong></h5>
+                                                    <h5 style="color: #005ca9;"><strong>Montants des seuils <span id="annee-seuils">2026</span> :</strong></h5>
                                                     <table class="table table-sm table-bordered mt-2">
                                                         <thead class="table-light fw-bold">
                                                             <tr>
@@ -225,7 +225,7 @@
                                                             </tr>
                                                         </tbody>
                                                     </table>
-                                                    <p class="text-danger small mt-2 text-center fst-italic">
+                                                    <p class="small mt-2 text-center fst-italic" style="color: #e7392e;">
                                                         Si l’EPCI recherché ne se trouve pas dans cette liste, c’est qu’il n’est pas concerné par l’obligation d’attribuer 25 % des logements hors QPV aux ménages du premier quartile pour l’année sélectionnée.
                                                     </p>
                                                 </div>
@@ -235,7 +235,7 @@
                                         <!-- Bloc Compo et Ressources -->
                                         <div class="col-lg-12 col-xl-10">
                                             <div class="row justify-content-center mb-4" data-aos="fade-up" data-aos-delay="100">
-                                                <h4 class="fw-bold" style="color: #0ea2bd;">2 - Composition du ménage + ressources déclarées</h4>
+                                                <h4 class="fw-bold" style="color: #005ca9;">2 - Composition du ménage + ressources déclarées</h4>
                                                 <label class="fw-bold">Titulaire de la demande : </label>
                                                 <input type="number" min="1" id="titulaire" class="form-control mb-2" value="1" readonly>
 
@@ -256,7 +256,7 @@
                                         <!-- Bloc Récap -->
                                         <div class="col-lg-12 col-xl-10">
                                             <div class="row justify-content-center mb-4" data-aos="fade-up" data-aos-delay="100">
-                                                <h4 class="fw-bold" style="color: #0ea2bd;">3 - Récapitulatif</h4>
+                                                <h4 class="fw-bold" style="color: #005ca9;">3 - Récapitulatif</h4>
                                                 <div class="table-responsive">
                                                     <table class="table table-bordered text-center">
                                                         <thead class="table-light">
@@ -299,7 +299,7 @@
                                                 <!-- Boutons Calculer et Réinitialiser -->
                                                 <p id="compositionMénage" class="mb-2 fw-semibold"></p>
                                                 <div id="quartileBox" class="alert d-none text-center fw-bold fs-5" style="padding: 15px; border: 2px solid #ccc; border-radius: 6px;"></div>
-                                                <button onclick="calculerLEC()" class="btn w-100 mb-3" style="background-color:#0ea2bd; color:white">Calculer</button>
+                                                <button onclick="calculerLEC()" class="btn w-100 mb-3" style="background-color:#005ca9; color:white">Calculer</button>
                                                 <button onclick="resetLEC()" class="btn btn-outline-secondary w-100 mb-3">Réinitialiser</button>
                                                 <div id="resultatLEC" class="alert alert-info d-none"></div>
                                                 <p id="rmucMensuel" class="mt-3 mb-1"></p>
