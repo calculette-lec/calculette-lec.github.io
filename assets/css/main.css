@@ -22,19 +22,22 @@
   --background-color: #ffffff; /* Background color for the entire website, including individual sections */
   --default-color: #3d4348; /* Default color used for the majority of the text content across the entire website */
   --heading-color: #3e5055; /* Color for headings, subheadings and title throughout the website */
-  --accent-color: #388da8; /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
+  --accent-color: #005ca9; /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
   --surface-color: #ffffff; /* The surface color is used as a background of boxed elements within sections, such as cards, icon boxes, or other elements that require a visual separation from the global background. */
   --contrast-color: #ffffff; /* Contrast color for text, ensuring readability against backgrounds of accent, heading, or default colors. */
+  --brand-blue: #005ca9;
+  --brand-yellow: #fcc243;
+  --brand-red: #e7392e;
 }
 
 /* Nav Menu Colors - The following color variables are used specifically for the navigation menu. They are separate from the global colors to allow for more customization options */
 :root {
   --nav-color: #313336;  /* The default color of the main navmenu links */
-  --nav-hover-color: #77b6ca; /* Applied to main navmenu links when they are hovered over or active */
+  --nav-hover-color: #005ca9; /* Applied to main navmenu links when they are hovered over or active */
   --nav-mobile-background-color: #ffffff; /* Used as the background color for mobile navigation menu */
   --nav-dropdown-background-color: #ffffff; /* Used as the background color for dropdown items that appear when hovering over primary navigation items */
   --nav-dropdown-color: #313336; /* Used for navigation links of the dropdown items in the navigation menu. */
-  --nav-dropdown-hover-color: #77b6ca; /* Similar to --nav-hover-color, this color is applied to dropdown navigation links when they are hovered over. */
+  --nav-dropdown-hover-color: #005ca9; /* Similar to --nav-hover-color, this color is applied to dropdown navigation links when they are hovered over. */
 }
 
 /* Color Presets - These classes override global colors when applied to any section or element, providing reuse of the sam color scheme. */
@@ -1305,15 +1308,15 @@ section,
 }
 
 .services .service-item.item-cyan .icon {
-  color: #0dcaf0;
-  border: 1px solid #0dcaf0;
-  background: rgba(13, 202, 240, 0.1);
+  color: #005ca9;
+  border: 1px solid #005ca9;
+  background: rgba(0, 92, 169, 0.10);
 }
 
 .services .service-item.item-orange .icon {
-  color: #fd7e14;
-  border: 1px solid #fd7e14;
-  background: rgba(253, 126, 20, 0.1);
+  color: #fcc243;
+  border: 1px solid #fcc243;
+  background: rgba(252, 194, 67, 0.14);
 }
 
 .services .service-item.item-teal .icon {
@@ -1323,9 +1326,9 @@ section,
 }
 
 .services .service-item.item-red .icon {
-  color: #df1529;
-  border: 1px solid #df1529;
-  background: rgba(223, 21, 4, 0.1);
+  color: #e7392e;
+  border: 1px solid #e7392e;
+  background: rgba(231, 57, 46, 0.10);
 }
 
 .services .service-item.item-indigo .icon {
@@ -1335,9 +1338,9 @@ section,
 }
 
 .services .service-item.item-pink .icon {
-  color: #f3268c;
-  border: 1px solid #f3268c;
-  background: rgba(243, 38, 140, 0.1);
+  color: #e7392e;
+  border: 1px solid #e7392e;
+  background: rgba(231, 57, 46, 0.10);
 }
 
 .services .service-item:hover {
@@ -1953,13 +1956,13 @@ section,
 --------------------------------------------------------------*/
 
 select.form-select {
-  border: 2px solid #0ea2bd;
+  border: 2px solid #005ca9;
   color: #000;
   background-color: #fff;
 }
 
 select.form-select:focus {
-  border-color: #0ea2bd;
-  box-shadow: 0 0 0 0.25rem rgba(14, 162, 189, 0.25);
+  border-color: #005ca9;
+  box-shadow: 0 0 0 0.25rem rgba(0, 92, 169, 0.25);
   outline: none;
 }
