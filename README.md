@@ -81,6 +81,6 @@ URH Hauts-de-France
 
 ---
 
-*Ce projet est librement réutilisable dans le cadre de la mission d'intérêt général portée par l’URH HDF.*
+*⚠️ Cette calculette a été conçue à l’origine pour un usage interne à l’Union Régionale pour l’Habitat Hauts-de-France. Elle est mise à disposition à titre informatif : l’URH Hauts-de-France ne saurait être tenue responsable d’éventuelles erreurs, omissions ou interprétations des résultats affichés.*
 
 
